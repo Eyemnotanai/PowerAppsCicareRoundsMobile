@@ -1,0 +1,866 @@
+Home As screen:
+    Fill: =RGBA(236, 236, 236, 1)
+    OnVisible: |-
+        =//write to audit log
+        Patch(
+            Audit_Log,
+            Defaults(Audit_Log),
+            {
+                Title: User().Email & " ",
+                Activity: App.ActiveScreen.Name & "/mobile. Home page loading...",
+                LocationLong: Location.Longitude,
+                LocationLat: Location.Latitude
+            }
+        );
+        
+        //Set time for session timeout
+        Set(lastActivityTime, Now());
+        //reset the timer for the UserLogOutCountDown
+        Reset(tmCountDown);
+        
+        UpdateContext({varHomeShadowShow:false});       //Hide shadow frame  (rectHomeShadow)
+        UpdateContext({varHomeTaskShow:false});         //Hide Home Tasks (grpHomeTasks)
+        UpdateContext({varHomeSelectSurveyShow:false});     //Hide select survey type warning message (lblHomeSurvTypeWarningMsg)
+        UpdateContext({varHomeDelRoundWarnShow:false});     //Hide confirmation message for deleting round (grpHomeCanceRoundConfirm)
+        UpdateContext({varHomeSurvTypeRadioReset:true});    //reset the home popup radio button
+        UpdateContext({varHomeSurvDateWarningShow:false});  //Hide incorrect survey date warning (lblHomeSurvDateWarning)
+
+    tmHome As timer:
+        Duration: =varTimeDuration
+        Height: =70
+        OnTimerEnd: |-
+            =If(
+                DateDiff(
+                    lastActivityTime,
+                    Now(),
+                    TimeUnit.Minutes
+                ) > varSessionTime,
+                //Launch("https://make.powerapps.com/",{}, LaunchTarget.Replace);
+                //Launch("https://make.powerapps.com/");
+                //Exit(true)
+                Navigate(UserLogOutCountDown, ScreenTransition.None)
+            )
+        Visible: =varTimerFlag
+        Width: =280
+        Y: =1016
+        ZIndex: =1
+
+    tabHome As Tabs:
+        Items: =colHorizontalMenu
+        Y: =htmlHomeBack.Y+htmlHomeBack.Height
+        ZIndex: =3
+
+    htmlHomeBack As htmlViewer:
+        Height: =688
+        HtmlText: |-
+            ="<div style='border:1px gray;border-radius:10%;height:675px;width:100%;background-color:#FCFCFC'></div>"
+        Width: =610
+        X: =15
+        Y: =rectHomeImgBK.Y+rectHomeImgBK.Height-28
+        ZIndex: =7
+
+    lblHomeNoUpcomeRoundMsg As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 0, 0, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =90
+        Size: =21
+        Text: ="You don't have any upcoming rounds"
+        Visible: =If(CountRows(galMyReservationsPreview.AllItems) >=1, false, true)
+        Width: =640
+        Y: =525
+        ZIndex: =8
+
+    "galMyReservationsPreview As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Height: =616
+        Items: |-
+            =With(
+                {   //for getting row count
+                    records: (SortByColumns(
+                        SortByColumns(
+                            AddColumns(
+                                Filter(
+                                    Filter(
+                                        Rounds_Calendar,
+                                        Lower(Attendees.Email) = Lower(varUserEmail)
+                                    ),
+                                    'Start Time' >= Today()
+                                ),
+                                "facility",
+                                R_Location.Value
+                            ),
+                            "facility",
+                            SortOrder.Ascending
+                        ),
+                        "EventDate",
+                        SortOrder.Ascending
+                    ))
+                },
+                ForAll( //TemplateFill alternate color for odd and even number of each row
+                    Sequence(CountRows(records)),
+                    Patch(
+                        Last(
+                            FirstN(
+                                records,
+                                Value
+                            )
+                        ),
+                        {rowNumber: Value}
+                    )
+                )
+            )
+        Layout: =Layout.Vertical
+        TemplateFill: |-
+            =If(
+                DateValue(Text(ThisItem.'Start Time')) = Today(),
+                RGBA(255, 245, 121, 1),
+                If(
+                    Mod(ThisItem.rowNumber, 2) = 0,
+                    RGBA(248, 248, 255, 1),
+                    RGBA(246, 244, 238, 1)
+                )
+            )
+            //RGBA(255, 245, 121, 1)
+        TemplatePadding: =0
+        TemplateSize: =140
+        Visible: =If(CountRows(galMyReservationsPreview.AllItems)>0,true, false)
+        Width: =605
+        X: =(Parent.Width-galMyReservationsPreview.Width)/2
+        Y: =galHomeMenu.Y+galHomeMenu.Height
+        ZIndex: =9
+
+        sepHomeRoundBorder As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =1
+
+        lblHomeRoundAddress As label:
+            Color: =RGBA(0,85, 135, 1)
+            Height: =36
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =ThisItem.'R_Location:Address'.Value
+            Width: =465
+            X: =lblHomeRoundAddressTitle.X+lblHomeRoundAddressTitle.Width
+            Y: =lblHomeRoundLocation.Y+lblHomeRoundLocation.Height
+            ZIndex: =2
+
+        lblHomeRoundAddressTitle As label:
+            Color: =RGBA(0,85, 135, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =36
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                ="Uint:"
+            Width: =70
+            X: =32
+            Y: =lblHomeRoundLocation.Y+lblHomeRoundLocation.Height
+            ZIndex: =3
+
+        lblHomeRoundLocation As label:
+            Color: =RGBA(0,85, 135, 1)
+            Height: =36
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |-
+                =If(//don't need to redundant the Location in the string
+                    ThisItem.Location in ThisItem.R_Location.Value,
+                    ThisItem.R_Location.Value,
+                    ThisItem.Location & ": " & ThisItem.R_Location.Value
+                )
+            Width: =545
+            X: =32
+            Y: =lblHomeRoundDateTime.Y+lblHomeRoundDateTime.Height
+            ZIndex: =4
+
+        lblHomeRoundDateTime As label:
+            Color: =RGBA(0,85, 135, 1)
+            Height: =36
+            OnSelect: =Select(Parent)
+            Size: =14
+            Text: |+
+                =Upper(Text(ThisItem.'Start Time',"[$-en-US]mmm")) & ", " & Upper(Text(ThisItem.'Start Time',"[$-en-US]dd")) & ", " & Text(ThisItem.'Start Time', DateTimeFormat.ShortTime) & " to " & Text(ThisItem.'End Time', DateTimeFormat.ShortTime)
+                
+            VerticalAlign: =VerticalAlign.Top
+            Width: =545
+            X: =32
+            Y: =10
+            ZIndex: =5
+
+        btnHomeRoundBG As button:
+            Fill: =Color.Transparent
+            Height: =135
+            HoverFill: =Color.Transparent
+            OnSelect: |+
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                
+                Set(varSelectedRoundRow, ThisItem.ID);
+                //Set(varSelectedRoundTitle, ThisItem.Title);
+                UpdateContext({varHomeShadowShow:true});       //show shadow frame  (rectHomeShadow)
+                UpdateContext({varHomeTaskShow:true});         //show Home Tasks popup frame (grpHomeTasks)
+                Set(varRoundRecord, galMyReservationsPreview.Selected); //for cancellation in grpHomeConcelRoundConfirm
+                Reset(radHomeSurvType); //reset the radio button in the popup (grpHomeTesks)
+                If(
+                    IsToday(ThisItem.'Start Time'),
+                    UpdateContext({varHomeSurvDateWarningShow:false}),   //show home show incorrect survey date message
+                    UpdateContext({varHomeSurvDateWarningShow:true});   //show home show incorrect survey date message
+                )
+                
+                
+                
+            PressedFill: =Color.Transparent
+            Size: =24
+            Text: =""
+            Width: =602
+            ZIndex: =6
+
+    grpHomeTitle As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =9
+
+        rectHomeImgBK As rectangle:
+            Fill: =Color.Transparent
+            Height: =317
+            Width: =640
+            Y: =lblLogoBK.Y+lblLogoBK.Height
+            ZIndex: =2
+
+        imgBk As image:
+            Height: =317
+            Image: ='Intervew-Day-2020'
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            Y: =lblLogoBK.Y+lblLogoBK.Height
+            ZIndex: =4
+
+        lblHomeUser As label:
+            Color: =RGBA(0, 59, 92,1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =102
+            Size: =26
+            Text: |+
+                =//Trim(Last(FirstN(Split(currentUser.FullName," "), 2)).Result)
+                Office365Users.MyProfile().GivenName
+                
+            Width: =203
+            X: =437
+            Y: =160
+            ZIndex: =5
+
+        lblHomeHead As label:
+            Color: =RGBA(0, 59, 92,1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =80
+            Size: =26
+            Text: ="Welcome back, " 
+            Width: =203
+            X: =437
+            Y: =86
+            ZIndex: =6
+
+    rectHomeShadow As rectangle:
+        Fill: =RGBA(201, 207, 212, 0.5)
+        Height: =Parent.Height-(galHomeMenu.Y+galHomeMenu.Height)
+        Visible: =varHomeTaskShow
+        Width: =602
+        X: =15
+        Y: =galHomeMenu.Y+galHomeMenu.Height
+        ZIndex: =10
+
+    galHomeMenu As gallery.galleryHorizontal:
+        DelayItemLoading: =true
+        Height: =40
+        Items: |-
+            =//["Upcoming Rounds", "Staff Survey", "Patient Survey"]
+            ["My Upcoming Rounds"]
+        LoadingSpinner: =LoadingSpinner.Data
+        TemplateFill: =If(ThisItem.IsSelected, RGBA(255, 199, 44, 1), RGBA(246, 244, 238, 1))
+        TemplatePadding: =0
+        TemplateSize: =300
+        Width: =558
+        X: =45
+        Y: =htmlHomeBack.Y+30
+        ZIndex: =11
+
+        btnHomeTabs As button:
+            Color: =RGBA(39, 116, 174,1)
+            Fill: =Color.Transparent
+            OnSelect: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile. Select menu tab " & ThisItem.Value & " from the home page.",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =14
+            Text: =ThisItem.Value
+            Width: =300
+            ZIndex: =1
+
+    grpHomeLogo As group:
+        Height: =5
+        Width: =5
+        X: =60
+        Y: =60
+        ZIndex: =12
+
+        lblLogoBK As label:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =35
+            Size: =21
+            Text: =""
+            Width: =640
+            ZIndex: =25
+
+        imgHomeLogo As image:
+            Height: =35
+            Image: =UCLA_H_CICARE_B_RGB
+            Width: =320
+            X: =//If(varUserRole = "Admin", 50, 0)
+            ZIndex: =26
+
+    grpHomeCancelRoundConfirm As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =22
+
+        rectHomeCancelRoundBK As rectangle:
+            BorderColor: =RGBA(101, 108, 113, 0.5)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =rectHomeTasksBG.Height
+            Visible: |
+                =varHomeDelRoundWarnShow
+            Width: =600
+            X: =17
+            Y: =rectHomeTasksBG.Y
+            ZIndex: =21
+
+        btnHomeCancelRoundNo As button:
+            Color: =RGBA(39, 116, 174, 1)
+            DisabledBorderColor: =ColorFade(Self.BorderColor, 70%)
+            DisabledColor: =ColorFade(RGBA(47, 41, 43, 1), 70%)
+            DisabledFill: =ColorFade(RGBA(159, 167, 165, 1), 50%)
+            Fill: =RGBA(255, 184, 28, 1)
+            Height: =71
+            HoverColor: =Self.Color
+            HoverFill: =ColorFade(Self.Fill, 20%)
+            OnSelect: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " ",
+                        Activity: App.ActiveScreen.Name & "/mobile. OnSelect cancel delete round.",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                UpdateContext({varHomeDelRoundWarnShow:false}); //hide popup cancel round warning
+            Size: =18
+            Text: ="Cancel"
+            Visible: |
+                =varHomeDelRoundWarnShow
+            Width: =131
+            X: =345
+            Y: =845
+            ZIndex: =22
+
+        btnHomeCancelRoundYes As button:
+            AutoDisableOnSelect: =false
+            Color: =RGBA(39, 116, 174, 1)
+            DisabledBorderColor: =ColorFade(Self.BorderColor, 70%)
+            DisabledColor: =ColorFade(RGBA(47, 41, 43, 1), 70%)
+            DisabledFill: =ColorFade(RGBA(159, 167, 165, 1), 50%)
+            Fill: =RGBA(255, 184, 28, 1)
+            Height: =71
+            HoverColor: =RGBA(39, 116, 174, 1)
+            HoverFill: =RGBA(255, 184, 28, 1)
+            OnSelect: |+
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " OnSelect delete round",
+                        Activity: App.ActiveScreen.Name & "/mobile. OnSelect delete round",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                Patch( Notification_Cancelled_Rounds, 
+                    Defaults(Notification_Cancelled_Rounds),
+                    {
+                        Title: varRoundRecord.Title, 
+                        Attendees: varRoundRecord.Attendees,
+                        Location: varRoundRecord.Location,
+                        'Start Time': varRoundRecord.'Start Time',
+                        'End Time': varRoundRecord.'End Time',
+                        Unit: varRoundRecord.R_Location.Value,
+                        Address: varRoundRecord.'R_Location:Address'.Value,
+                        Rounds_Schedule_ID: varRoundRecord.Rounds_Schedule_ID,
+                        Send_Notification: true
+                
+                    }
+                    
+                );
+                Remove(Rounds_Calendar,varRoundRecord);  //remove the selected row if the cancel
+                UpdateContext({varHomeDelRoundWarnShow:false}); //hide popup cancel round warning
+                UpdateContext({varHomeTaskShow:false}); //hide grpHomeTasks
+                UpdateContext({varHomeSelectSurveyShow:false}); //hide survey type selection worning message varHomeSelectSurveyShow
+                
+                
+                
+            PressedColor: =RGBA(39, 116, 174, 1)
+            PressedFill: =RGBA(255, 184, 28, 1)
+            Size: =18
+            Text: ="OK"
+            Visible: |
+                =varHomeDelRoundWarnShow
+            Width: =131
+            X: =160
+            Y: =845
+            ZIndex: =23
+
+        lblHomeCancelRoundWarnMsg As label:
+            BorderColor: =RGBA(101, 128, 187, 1)
+            Color: =RGBA(255,59,92,1)
+            DisabledColor: =ColorFade(RGBA(47, 41, 43, 1), 70%)
+            Fill: =Color.Transparent
+            FontWeight: =FontWeight.Semibold
+            Height: =254
+            PaddingBottom: =20
+            PaddingLeft: =30
+            PaddingRight: =10
+            PaddingTop: =20
+            Size: =21
+            Text: ="You are about to DELETE the schedule. "& Char(10) &" It cannot be restored at a later time!" & Char(10) & Char(10) & " Click ""OK"" to delete this schedule."& Char(10) & " Click ""Cancel"" to exsit."
+            VerticalAlign: =VerticalAlign.Top
+            Visible: |
+                =varHomeDelRoundWarnShow
+            Width: =578
+            X: =28
+            Y: =551
+            ZIndex: =24
+
+    grpHomeTasks As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =28
+
+        rectHomeTasksBG As rectangle:
+            BorderColor: =RGBA(39, 116, 174, 1)
+            BorderThickness: =5
+            Fill: =RGBA(255, 255, 232558, 01)
+            Height: =686
+            Visible: =varHomeTaskShow
+            Width: =605
+            X: =(Parent.Width-rectHomeTasksBG.Width)/2
+            Y: =htmlHomeBack.Y
+            ZIndex: =12
+
+        btnHomeTaskSurvey As button:
+            AutoDisableOnSelect: =false
+            Color: =RGBA(255,255,255,1)
+            DisabledBorderColor: =ColorFade(Self.BorderColor, 70%)
+            DisabledColor: =ColorFade(RGBA(255, 245, 121, 1), 70%)
+            DisabledFill: =ColorFade(RGBA(159, 167, 165, 1), 50%)
+            DisplayMode: |-
+                =If(
+                    IsToday(
+                        LookUp(
+                            Rounds_Calendar,
+                            ID = varSelectedRoundRow,
+                            'Start Time'
+                        )
+                    ),
+                    DisplayMode.Edit,
+                    DisplayMode.Disabled
+                )
+            Fill: =RGBA(39, 116, 174, 1)
+            Height: =62
+            HoverColor: =Self.Color
+            HoverFill: =RGBA(39, 116, 174, 1)
+            OnSelect: |
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile. Clicked on Start " & radHomeSurvType.Selected.Value,
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                
+                //varHomeSelectSurveyShow
+                If(//if use click the "Start Surevey" without select the survey type, display warning
+                    IsBlank(radHomeSurvType.Selected.Value),
+                    UpdateContext({varHomeSelectSurveyShow: true}),
+                    UpdateContext({varHomeSelectSurveyShow: false});
+                    //launch survey page
+                    If(//["Staff Survey", "Patient Survey", "Family/Visitor Survey"]
+                        radHomeSurvType.Selected.Value = "Staff Survey",
+                        Navigate(
+                            StaffSurveyForm,
+                            ScreenTransition.None,
+                            {
+                                varMyreservationTitle: LookUp(Rounds_Calendar, ID=varSelectedRoundRow, Title)
+                            }
+                        ),
+                        If(
+                            radHomeSurvType.Selected.Value = "Patient Survey",
+                            Navigate(PatientSurveyForm, ScreenTransition.None),
+                            If(
+                                radHomeSurvType.Selected.Value = "Family/Visitor Survey",
+                                Navigate(FamilySurvey, ScreenTransition.None)
+                            )
+                        )
+                    );//*** end if survey type
+                    UpdateContext({varHomeSurvTypeRadioReset:true});    //reset the home popup radio button
+                );  //*** end if radio button validation
+                /* ALL OF THE FOLLOWING CODE MAY BE DELETED
+                // Select(Parent);
+                If (IsBlank(galMyReservationsPreview.Selected.Attendees.DisplayName), 
+                    UpdateContext({recipientEmail: User().Email, recipient: User().FullName }),  
+                    UpdateContext({recipientEmail: galMyReservationsPreview.Selected.Attendees.Email & " ; " & User().Email, recipient: galMyReservationsPreview.Selected.Attendees.DisplayName })
+                );
+                
+                //Meeting location
+                If(galMyReservationsPreview.Selected.Location = "RR",
+                    Set(varHomeCancelLocation, "Rounald Reagan Hospital, Tamkin Auditorium (B-130)"),
+                    Set(varHomeCancelLocation, "•	Santa Monica Auditorium- Room (G340)")
+                );
+                Set(varHomeRoundsUnit, LookUp(Rounds_Location, Title=galMyReservationsPreview.Selected.R_Location.Value).Address);
+                Set(varHomeCancelStartDate, DateValue(galMyReservationsPreview.Selected.'Start Time'));
+                Set(varHomeCancelStartTime,TimeValue(galMyReservationsPreview.Selected.'Start Time'));
+                Set(varHomeCancelSubject,"You Cancelled your upcoming CICARE Round. ");
+                Set(varHomeCancelMsg,"<p>Dear " & recipient & "</p><p>This is a confirmation that you have cancelled your reservation for the following round:</p><p>CICARE Rounds on " & varHomeCancelStartDate & " from " & varHomeCancelStartTime & "</p><p>Meeting Location: " & varHomeCancelLocation & "</p><p>Rounding Area: " & varHomeRoundsUnit & "</p><p>If you need to reschedule a CICARE Round, pleaseuse the <a href='https://apps.powerapps.com/play/0e1fa206-d4b6-463e-933e-b5881da990e9?tenantId=39c3716b-6471-4fd5-ac04-a7dbaa32782b&hidenavbar=true'>CICARE App</a></p> ");
+                
+                //send email
+                Office365Outlook.SendEmailV2(recipientEmail,varHomeCancelSubject,varHomeCancelMsg,{Importance:"Normal"});
+                */
+                /*
+                Office365Outlook.SendEmailV2(recipientEmail, 
+                                             "Your CICARE round at " & galMyReservationsPreview.Selected.R_Location.Value & " from " & galMyReservationsPreview.Selected.'Start Time' & " to " & galMyReservationsPreview.Selected.'End Time' & " is canceled. ", 
+                                             "Dear " & recipient & "<br>" & "<P> Your CICARE round at " & galMyReservationsPreview.Selected.R_Location.Value & " from " & galMyReservationsPreview.Selected.'Start Time' & " to " & galMyReservationsPreview.Selected.'End Time' & " is canceled. </P>" & "<P>If you need to book a new round please go to the PowerApps. </P>" & "<P>Click the following link to access the PowerApps. <BR> <a href='https://apps.powerapps.com/play/0e1fa206-d4b6-463e-933e-b5881da990e9?tenantId=39c3716b-6471-4fd5-ac04-a7dbaa32782b&hidenavbar=true'>UCLA Health CICARE Rounds</a>  </P>"
+                );
+                */
+                /*
+                Remove(Rounds_Calendar,galMyReservationsPreview.Selected);
+                UpdateContext({varDelRoundWarnShow:false});
+                
+                //Reset timer
+                Set(
+                    lastActivityTime,
+                    Now()
+                );*/
+            PressedFill: =RGBA(39, 116, 174, 1)
+            Size: =18
+            Text: ="Start Survey"
+            Visible: |-
+                =varHomeTaskShow
+                
+                /*
+                If(
+                    IsToday(ThisItem.'Start Time')
+                    true,
+                    false
+                )
+                */
+            Width: =300
+            X: =163
+            Y: =radHomeSurvType.Y+radHomeSurvType.Height+80
+            ZIndex: =13
+
+        btnHomeTaskCacelRound As button:
+            Color: =RGBA(255,255,255,1)
+            DisabledBorderColor: =ColorFade(Self.BorderColor, 70%)
+            DisabledColor: =ColorFade(RGBA(47, 41, 43, 1), 70%)
+            DisabledFill: =ColorFade(RGBA(159, 167, 165, 1), 50%)
+            Fill: |-
+                =//RGBA(39, 116, 174, 1)
+                RGBA(255, 0, 0, 1)
+            Height: =62
+            HoverColor: =Self.Color
+            HoverFill: =RGBA(255, 0, 0, 1)
+            OnSelect: |+
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile. Cancel Round",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                UpdateContext({varHomeDelRoundWarnShow:true});      //Show delete warning popup (grpHomeCancelRoundConfirm)
+                UpdateContext({varHomeSurvDateWarningShow:false});   //hide home show incorrect survey date message (lblHomeSurvDateWarning)
+                
+            PressedFill: =RGBA(255, 0, 0, 1)
+            Size: =18
+            Text: ="Cancel This Round"
+            Visible: =varHomeTaskShow
+            Width: =300
+            X: =163
+            Y: =btnHomeTaskSurvey.Y+btnHomeTaskSurvey.Height+20
+            ZIndex: =14
+
+        radHomeSurvType As radio:
+            Color: =RGBA(0, 85, 135, 1)
+            DisplayMode: |-
+                =If(
+                    IsToday(
+                        LookUp(
+                            Rounds_Calendar,
+                            ID = varSelectedRoundRow,
+                            'Start Time'
+                        )
+                    ),
+                    DisplayMode.Edit,
+                    DisplayMode.Disabled
+                )
+            FontWeight: =FontWeight.Semibold
+            Height: =130
+            Items: =["Staff Survey", "Patient Survey", "Family/Visitor Survey"]
+            LineHeight: =1.25
+            OnChange: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " OnCheck survey type",
+                        Activity: App.ActiveScreen.Name & "/Mobile app",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                Reset(tmCountDown);
+                
+                //do nothing
+                //UpdateContext({varHomeSelectSurveyShow:false});     //Hide select survey type warning message (lblHomeSurvTypeWarningMsg)
+            OnSelect: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile. OnSelect survey type radio button.",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                UpdateContext({varHomeSelectSurveyShow: false}); //Hide select survey type warning message (lblHomeSurvTypeWarningMsg)
+                UpdateContext({varHomeTaskShow: false});    //hide grpHomeTasks
+                UpdateContext({varHomeSurvDateWarningShow: false}); //hide lblHomeSurvDateWarning
+                /*
+                varDoSurvey
+                varSurvStatus
+                varRoundRecord
+                */
+                //launch survey form for click on the radio button
+                If(
+                    radHomeSurvType.Selected.Value = "Staff Survey",
+                    Navigate(StaffSurveyForm, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"}),
+                    If(
+                        radHomeSurvType.Selected.Value = "Patient Survey",
+                        Navigate(PatientSurveyForm, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"}),
+                        If(
+                            radHomeSurvType.Selected.Value = "Family/Visitor Survey",
+                            Navigate(FamilySurvey, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"})
+                        )
+                    )
+                )
+            RadioSize: =35
+            Reset: =varHomeSurvTypeRadioReset
+            Size: =18
+            Visible: =varHomeTaskShow
+            Width: =367
+            X: =130
+            Y: =lblHomeSurvTypeWarningMsg.Y+lblHomeSurvTypeWarningMsg.Height
+            ZIndex: =15
+
+        lblHomeSurvTypeWarningMsg As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 0, 0, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =90
+            Size: =21
+            Text: ="Please select the Survey"
+            Visible: =varHomeSelectSurveyShow
+            Width: =585
+            X: =rectHomeTasksBG.X+10
+            Y: =lblHomeTaskRoundAddress.Y+lblHomeTaskRoundAddress.Height
+            ZIndex: =16
+
+        lblHomeSurvDateWarning As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 0, 0, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =90
+            PaddingBottom: =0
+            PaddingTop: =0
+            Size: =25
+            Text: ="Surevy cannot be started" & Char(10) & "until the round date"
+            Visible: =varHomeSurvDateWarningShow
+            Width: =560
+            X: =38
+            Y: =lblHomeTaskRoundAddress.Y+lblHomeTaskRoundAddress.Height
+            ZIndex: =17
+
+        lblHomeTaskRoundAddress As label:
+            Color: =RGBA(0,85,135,1)
+            FontWeight: =FontWeight.Semibold
+            Height: =49
+            PaddingLeft: =25
+            Size: =18
+            Text: |-
+                =varRoundRecord.Location & ": " & varRoundRecord.'R_Location:Address'.Value
+            Visible: =varHomeTaskShow
+            Width: =585
+            X: =rectHomeTasksBG.X+10
+            Y: =lblHomeTaskRoundDateTime.Y+lblHomeTaskRoundDateTime.Height
+            ZIndex: =18
+
+        lblHomeTaskRoundDateTime As label:
+            BorderColor: =RGBA(101, 128, 187, 1)
+            Color: =RGBA(0,85,135,1)
+            DisabledColor: =ColorFade(RGBA(47, 41, 43, 1), 70%)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =49
+            PaddingLeft: =25
+            Size: =18
+            Text: |-
+                =Text(
+                    varRoundRecord.'Start Time',
+                    "[$-en-US]mmm"
+                ) & ", " & Text(
+                    varRoundRecord.'Start Time',
+                    "[$-en-US]dd"
+                ) & ", " & Text(
+                    varRoundRecord.'Start Time',
+                    DateTimeFormat.ShortTime
+                ) & " to " & Text(
+                    varRoundRecord.'End Time',
+                    DateTimeFormat.ShortTime
+                )
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =varHomeTaskShow
+            Width: =585
+            X: =28
+            Y: =rectHomeTasksBG.Y+60
+            ZIndex: =19
+
+        iconHomeTaskRoundClose As icon.CancelBadge:
+            BorderColor: =RGBA(255, 184, 28, 1)
+            Color: =RGBA(0, 59, 92, 1)
+            Height: =62
+            Icon: =Icon.CancelBadge
+            OnSelect: |
+                =UpdateContext({varHomeShadowShow:false});       //Hide shadow frame  (rectHomeShadow)
+                UpdateContext({varHomeTaskShow:false});         //Hide Home Tasks (grpHomeTasks)
+                UpdateContext({varHomeSelectSurveyShow:false}); //Hide survey warning massage (lblHomeSurvTypeWarningMSG)
+                UpdateContext({varHomeDelRoundWarnShow:false});  //hide delete warning message (grpHomeCancelRoundConfirm)
+                UpdateContext({varHomeSurvDateWarningShow:false});   //hide home show incorrect survey date message (lblHomeSurvDateWarning)
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " Close home task popup ",
+                        Activity: App.ActiveScreen.Name & "/Mobile app",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+            Tooltip: ="Close"
+            Visible: =varHomeTaskShow
+            Width: =50
+            X: =rectHomeTasksBG.Width - iconHomeTaskRoundClose.Width
+            Y: =365
+            ZIndex: =20
+

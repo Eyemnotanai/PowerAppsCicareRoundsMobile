@@ -1,0 +1,1461 @@
+StaffSurveyForm As screen:
+    Fill: =RGBA(236, 236, 236, 1)
+    OnVisible: |-
+        =//write to audit log
+        Patch(
+            Audit_Log,
+            Defaults(Audit_Log),
+            {
+                Title: User().Email,
+                Activity: App.ActiveScreen.Name & "/mobile",
+                LocationLong: Location.Longitude,
+                LocationLat: Location.Latitude
+            }
+        );
+        //Set time for session timeout
+        Set(lastActivityTime, Now());
+        //reset timer for UserLogOutCountDown page
+        Reset(tmCountDown);
+        
+        
+        //parameters from home page
+        /*
+        Clear(colStaffRecognized);
+        //for edit staff survey recognize staff default combobox selected value
+        If(
+            varSurvStatus = "edit",
+            ForAll(
+                LookUp(
+                    Patient_Survey,
+                    Title = varMyreservationTitle,
+                    Staff
+                ),
+                Collect(
+                    colStaffRecognized,
+                    {
+                        '@odata.type': "#Mcrosoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                        Claims: "i:0#.f|membership|" & ThisRecord.Email,
+                        Department: "",
+                        DisplayName: ThisRecord.DisplayName,
+                        Mail: ThisRecord.Email,
+                        JobTitle: "",
+                        Picture: ""
+                    }
+                )
+            )
+        );
+        
+        varDoSurvey:"roundAndSurvey"
+        varSurvStatus:"new"
+        varRoundRecord
+        */
+
+    tmStaffSurveyForm As timer:
+        Duration: =varTimeDuration
+        Height: =70
+        OnTimerEnd: |-
+            =If(
+                DateDiff(
+                    lastActivityTime,
+                    Now(),
+                    TimeUnit.Minutes
+                ) > varSessionTime,
+                //Launch("https://make.powerapps.com/",{}, LaunchTarget.Replace);
+                //Launch("https://make.powerapps.com/");
+                //Exit(true)
+                Navigate(UserLogOutCountDown, ScreenTransition.None)
+            )
+        Visible: =varTimerFlag
+        Width: =280
+        X: =20
+        Y: =1036
+        ZIndex: =1
+
+    tabStaffSurveyForm As Tabs:
+        Items: =colHorizontalMenu
+        Y: =htmlHomeBack.Y+htmlHomeBack.Height
+        ZIndex: =2
+
+    htmlStaffSurv As htmlViewer:
+        Height: =885
+        HtmlText: |-
+            ="<div style='border:1px gray;border-radius:10%;height:790px;width:100%;background-color:#FCFCFC'></div>"
+        Width: =610
+        X: =15
+        Y: =imgStaffSurvHead.Y+imgStaffSurvHead.Height-28
+        ZIndex: =6
+
+    grpStaffSurveyHead As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =6
+
+        imgStaffSurvHead As image:
+            Height: =150
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            Y: =5
+            ZIndex: =3
+
+        rectStaffSurvHeadBG As rectangle:
+            Fill: =RGBA(39, 116, 181, 0.65)
+            Height: =150
+            Width: =640
+            Y: =5
+            ZIndex: =4
+
+        lblStaffSurvHead As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =150
+            Size: =32
+            Text: ="Staff Survey"
+            Width: =640
+            Y: =5
+            ZIndex: =5
+
+    btnStaffSurvSubmit As button:
+        Fill: =RGBA(0, 85, 135, 1)
+        Height: =50
+        OnSelect: |+
+            =//logging activites
+            
+            //refresh time for the timeout
+            Set(lastActivityTime, Now());
+            
+            
+            //write to audit log
+            Patch(
+                Audit_Log,
+                Defaults(Audit_Log),
+                {
+                    Title: User().Email & " Round Location",
+                    Activity: App.ActiveScreen.Name  & "/mobile. submit survey form",
+                    LocationLong: Location.Longitude,
+                    LocationLat: Location.Latitude
+                }
+            );
+            
+            //Set time for session timeout
+            Set(lastActivityTime, Now());
+            //reset the timer for the UserLogOutCountDown
+            Reset(tmCountDown);
+            
+            Clear(colStaffRecognizedList);
+            ForAll(
+                DataCardValue20.SelectedItems,
+                Collect(
+                    colStaffRecognizedList,
+                    {
+                        '@odata.type': "#Mcrosoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                        Claims: "i:0#.f|membership|" & ThisRecord.Email,
+                        Department: "",
+                        DisplayName: ThisRecord.DisplayName,
+                        GivenName: Office365Users.UserProfile(ThisRecord.Email).GivenName,
+                        Email: ThisRecord.Email,
+                        JobTitle: "",
+                        Picture: ""
+            
+                    }
+                )
+            );
+            
+            Clear(colFollowUpPeopleList);
+            ForAll(
+                DataCardValue16.SelectedItems,
+                Collect(
+                    colFollowUpPeopleList,
+                    {
+                        '@odata.type': "#Mcrosoft.Azure.Connectors.SharePoint.SPListExpandedUser",
+                        Claims: "i:0#.f|membership|" & ThisRecord.Email,
+                        Department: "",
+                        DisplayName: ThisRecord.DisplayName,
+                        GivenName: Office365Users.UserProfile(ThisRecord.Email).GivenName,
+                        Email: ThisRecord.Email,
+                        JobTitle: "",
+                        Picture: ""
+                    }
+                )
+            );
+            Patch(
+                Staff_Survey, 
+                Defaults(Staff_Survey), 
+                {
+                    Title:DataCardValue2.Text,
+                    Positive_Feedback:DataCardValue4.Text,
+                    Resources_Needed_for_Role: If(DataCardValue8.Selected.Value="Yes", true, false),
+                    Resources_Utilized: DataCardValue9.Text,
+                    Resources_Needed: DataCardValue10.Text,
+                    CICARE_Practice_Rating: {Value:DataCardValue7.Selected.Value},
+                    Staff_Recognized: colStaffRecognizedList
+                    //Recognition_Comment
+                    //Opportunity_for_Improvement
+                    //Need_Follow_up
+                    //Name_for_Follow_up
+                    //Name_for_Follow_up_text
+                    //Round_Location
+                    //Round_Unit
+            
+                }
+            )
+            /*
+            Title
+            Positive_Feedback
+            Resources_Needed_for_Role
+            Resources_Utilized
+            Resources_Needed
+            CICARE_Practice_Rating
+            Staff_Recognized
+            Recognition_Comment
+            Opportunity_for_Improvement
+            Need_Follow_up
+            Name_for_Follow_up
+            Name_for_Follow_up_text
+            Round_Location
+            Round_Unit
+            */
+            
+            
+            
+            
+            
+            
+        Size: =20
+        Text: ="Submit"
+        Width: =180
+        X: =333
+        Y: =945
+        ZIndex: =7
+
+    btnStaffSurvBack As button:
+        Fill: =RGBA(128, 128, 128, 1)
+        Height: =50
+        HoverFill: =RGBA(128, 128, 128, 1)
+        OnSelect: |-
+            =//write to audit log
+            Patch(
+                Audit_Log,
+                Defaults(Audit_Log),
+                {
+                    Title: User().Email,
+                    Activity: App.ActiveScreen.Name  & "/mobile. Back to home page from staff survey page",
+                    LocationLong: Location.Longitude,
+                    LocationLat: Location.Latitude
+                }
+            );
+            
+            //Set time for session timeout
+            Set(lastActivityTime, Now());
+            //reset the timer for the UserLogOutCountDown
+            Reset(tmCountDown);
+            
+            //back to previous page
+            Back();
+        PressedFill: =RGBA(128, 128, 128, 1)
+        Size: =20
+        Text: ="Back"
+        Width: =180
+        X: =90
+        Y: =945
+        ZIndex: =8
+
+    frmStaff As form:
+        DataSource: =Staff_Survey
+        DefaultMode: |-
+            =If(
+                varSurvStatus = "new",
+                FormMode.New,
+                FormMode.Edit
+            )
+        Height: =767
+        Item: =Defaults(Staff_Survey)
+        Width: =590
+        X: =24
+        Y: =144
+        ZIndex: =9
+
+        Title_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Title"
+            Default: =ThisItem.Title
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Title")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Title")
+            Required: =true
+            Update: =DataCardValue2.Text
+            Width: =590
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            DataCardKey2 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue2 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: |
+                    =If(
+                        varDoSurvey = "roundAndSurvey",
+                        varRoundRecord.Title,
+                        User().FullName & " @" & varMyreservationTitle & " " & Today()
+                    )
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+                ZIndex: =2
+
+            ErrorMessage3 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue2.Y + DataCardValue2.Height
+                ZIndex: =3
+
+            StarVisible3 As label:
+                Align: =Align.Center
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =DataCardKey2.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey2.Y
+                ZIndex: =4
+
+        Positive_Feedback_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Positive_Feedback"
+            Default: =ThisItem.Positive_Feedback
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Positive_Feedback")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Positive_Feedback")
+            Required: =false
+            Update: =DataCardValue4.Text
+            Width: =590
+            X: =0
+            Y: =1
+            ZIndex: =1
+
+            DataCardKey4 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue4 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                ZIndex: =2
+
+            ErrorMessage8 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue4.Y + DataCardValue4.Height
+                ZIndex: =3
+
+            StarVisible8 As label:
+                Align: =Align.Center
+                Height: =DataCardKey4.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey4.Y
+                ZIndex: =4
+
+        Resources_Needed_for_Role_DataCard2 As typedDataCard.yesNoRadioEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Resources_Needed_for_Role"
+            Default: =ThisItem.Resources_Needed_for_Role
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Resources_Needed_for_Role")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue8.Selected.Value = "Yes"
+            Width: =590
+            X: =0
+            Y: =2
+            ZIndex: =1
+
+            DataCardKey10 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue8 As radio:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: ="Yes"
+                DisplayMode: =Parent.DisplayMode
+                Height: =90
+                Items: =["Yes", "No"]
+                LineHeight: =1.25
+                PaddingBottom: =0
+                PaddingLeft: =30
+                RadioSize: =35
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 70
+                X: =If(Self.RadioSize = 20, 18, Self.Height = 70, 12, 14)
+                Y: =DataCardKey10.Y + DataCardKey10.Height + 5
+                ZIndex: =2
+
+            ErrorMessage10 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue8.Y + DataCardValue8.Height
+                ZIndex: =3
+
+            StarVisible10 As label:
+                Align: =Align.Center
+                Height: =DataCardKey10.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey10.Y
+                ZIndex: =4
+
+        Resources_Utilized_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Resources_Utilized"
+            Default: =ThisItem.Resources_Utilized
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Resources_Utilized")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Resources_Utilized")
+            Required: =false
+            Update: =DataCardValue9.Text
+            Visible: =If(DataCardValue8.Selected.Value="Yes", true, false)
+            Width: =590
+            X: =0
+            Y: =3
+            ZIndex: =1
+
+            DataCardKey11 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue9 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey11.Y + DataCardKey11.Height + 5
+                ZIndex: =2
+
+            ErrorMessage11 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue9.Y + DataCardValue9.Height
+                ZIndex: =3
+
+            StarVisible11 As label:
+                Align: =Align.Center
+                Height: =DataCardKey11.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey11.Y
+                ZIndex: =4
+
+        Resources_Needed_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Resources_Needed"
+            Default: =ThisItem.Resources_Needed
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Resources_Needed")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Resources_Needed")
+            Required: =false
+            Update: =DataCardValue10.Text
+            Visible: =If(DataCardValue8.Selected.Value="No", true, false)
+            Width: =590
+            X: =0
+            Y: =4
+            ZIndex: =1
+
+            DataCardKey12 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue10 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey12.Y + DataCardKey12.Height + 5
+                ZIndex: =2
+
+            ErrorMessage12 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue10.Y + DataCardValue10.Height
+                ZIndex: =3
+
+            StarVisible12 As label:
+                Align: =Align.Center
+                Height: =DataCardKey12.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey12.Y
+                ZIndex: =4
+
+        CICARE_Practice_Rating_DataCard1 As typedDataCard.comboBoxEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="CICARE_Practice_Rating"
+            Default: =ThisItem.CICARE_Practice_Rating
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"CICARE_Practice_Rating")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =262
+            Required: =false
+            Update: =DataCardValue7.Selected
+            Width: =590
+            X: =0
+            Y: =5
+            ZIndex: =1
+
+            DataCardKey9 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue7 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                ChevronBackground: =RGBA(39,116,174,1)
+                Color: =RGBA(39,116,174,1)
+                DefaultSelectedItems: =[radStaffRating.Selected.Value]
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                Items: =Choices([@Staff_Survey].CICARE_Practice_Rating)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                SearchFields: =["Value"]
+                SearchItems: =Choices(Staff_Survey.CICARE_Practice_Rating,DataCardValue7.SearchText)
+                SelectMultiple: =false
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Visible: =false
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey9.Y + DataCardKey9.Height + 5
+                ZIndex: =2
+
+            ErrorMessage9 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue7.Y + DataCardValue7.Height
+                ZIndex: =3
+
+            StarVisible9 As label:
+                Align: =Align.Center
+                Height: =DataCardKey9.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey9.Y
+                ZIndex: =4
+
+            radStaffRating As radio:
+                Color: =RGBA(39,116,174,1)
+                Default: ="Always"
+                FontWeight: =FontWeight.Semibold
+                Height: =164
+                Items: =["Always","Usually","Sometimes","Never"]
+                LineHeight: =1.25
+                PaddingLeft: =20
+                RadioSize: =35
+                Size: =18
+                Width: =312
+                X: =46
+                Y: =79
+                ZIndex: =5
+
+        Staff_Recognized_DataCard2 As typedDataCard.comboBoxMultiSelectEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Staff_Recognized"
+            Default: =ThisItem.Staff_Recognized
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Staff_Recognized")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue20.SelectedItems
+            Width: =590
+            X: =0
+            Y: =6
+            ZIndex: =1
+
+            DataCardKey22 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue20 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                ChevronBackground: =RGBA(39,116,174,1)
+                Color: =RGBA(39,116,174,1)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["DisplayName","Email","GivenName"]
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                InputTextPlaceholder: ="Last name, first name or email"
+                Items: =Choices([@Staff_Survey].Staff_Recognized)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                SearchFields: =["DisplayName","Email","GivenName"]
+                SearchItems: =Choices(Staff_Survey.Staff_Recognized,DataCardValue20.SearchText)
+                Size: =18
+                Template: =ListItemTemplate.Person
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey22.Y + DataCardKey22.Height + 5
+                ZIndex: =2
+
+            ErrorMessage22 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue20.Y + DataCardValue20.Height
+                ZIndex: =3
+
+            StarVisible22 As label:
+                Align: =Align.Center
+                Height: =DataCardKey22.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey22.Y
+                ZIndex: =4
+
+        Recognition_Comment_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Recognition_Comment"
+            Default: =ThisItem.Recognition_Comment
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Recognition_Comment")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Recognition_Comment")
+            Required: =false
+            Update: =DataCardValue13.Text
+            Width: =590
+            X: =0
+            Y: =7
+            ZIndex: =1
+
+            DataCardKey15 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue13 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey15.Y + DataCardKey15.Height + 5
+                ZIndex: =2
+
+            ErrorMessage15 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue13.Y + DataCardValue13.Height
+                ZIndex: =3
+
+            StarVisible15 As label:
+                Align: =Align.Center
+                Height: =DataCardKey15.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey15.Y
+                ZIndex: =4
+
+        Opportunity_for_Improvement_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Opportunity_for_Improvement"
+            Default: =ThisItem.Opportunity_for_Improvement
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Opportunity_for_Improvement")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Opportunity_for_Improvement")
+            Required: =false
+            Update: =DataCardValue14.Text
+            Width: =590
+            X: =0
+            Y: =8
+            ZIndex: =1
+
+            DataCardKey16 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue14 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey16.Y + DataCardKey16.Height + 5
+                ZIndex: =2
+
+            ErrorMessage16 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue14.Y + DataCardValue14.Height
+                ZIndex: =3
+
+            StarVisible16 As label:
+                Align: =Align.Center
+                Height: =DataCardKey16.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey16.Y
+                ZIndex: =4
+
+        Need_Follow_up_DataCard3 As typedDataCard.yesNoRadioEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Need_Follow_up"
+            Default: =ThisItem.Need_Follow_up
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Need_Follow_up")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue22.Selected.Value = "Yes"
+            Width: =590
+            X: =0
+            Y: =9
+            ZIndex: =1
+
+            DataCardKey24 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue22 As radio:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: ="No"
+                DisplayMode: =Parent.DisplayMode
+                Items: =["Yes", "No"]
+                LineHeight: =1.25
+                PaddingBottom: =0
+                PaddingLeft: =30
+                RadioSize: =35
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 70
+                X: =If(Self.RadioSize = 20, 18, Self.Height = 70, 12, 14)
+                Y: =DataCardKey24.Y + DataCardKey24.Height + 5
+                ZIndex: =2
+
+            ErrorMessage24 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue22.Y + DataCardValue22.Height
+                ZIndex: =3
+
+            StarVisible24 As label:
+                Align: =Align.Center
+                Height: =DataCardKey24.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey24.Y
+                ZIndex: =4
+
+        Name_for_Follow_up_DataCard1 As typedDataCard.comboBoxEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Name_for_Follow_up"
+            Default: =ThisItem.Name_for_Follow_up
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Name_for_Follow_up")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue16.Selected
+            Visible: =If(DataCardValue22.Selected.Value="Yes", true, false)
+            Width: =590
+            X: =0
+            Y: =10
+            ZIndex: =1
+
+            DataCardKey18 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue16 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                ChevronBackground: =RGBA(39,116,174,1)
+                Color: =RGBA(0, 85, 135, 1)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["DisplayName","Email", "GivenName"]
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                Items: =Choices([@Staff_Survey].Name_for_Follow_up)
+                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                SearchFields: =["DisplayName","Email", "GivenName"]
+                SearchItems: =Choices(Staff_Survey.Name_for_Follow_up,DataCardValue16.SearchText)
+                SelectMultiple: =false
+                Size: =18
+                Template: =ListItemTemplate.Person
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey18.Y + DataCardKey18.Height + 5
+                ZIndex: =2
+
+            ErrorMessage18 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue16.Y + DataCardValue16.Height
+                ZIndex: =3
+
+            StarVisible18 As label:
+                Align: =Align.Center
+                Height: =DataCardKey18.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey18.Y
+                ZIndex: =4
+
+        Name_for_Follow_up_text_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Name_for_Follow_up_text"
+            Default: =ThisItem.Name_for_Follow_up_text
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Name_for_Follow_up_text")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Name_for_Follow_up_text")
+            Required: =false
+            Update: =DataCardValue17.Text
+            Visible: =If(DataCardValue22.Selected.Value="Yes", true, false)
+            Width: =590
+            X: =0
+            Y: =11
+            ZIndex: =1
+
+            DataCardKey19 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue17 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey19.Y + DataCardKey19.Height + 5
+                ZIndex: =2
+
+            ErrorMessage19 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue17.Y + DataCardValue17.Height
+                ZIndex: =3
+
+            StarVisible19 As label:
+                Align: =Align.Center
+                Height: =DataCardKey19.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey19.Y
+                ZIndex: =4
+
+        Round_Location_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Round_Location"
+            Default: =ThisItem.Round_Location
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Round_Location")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Round_Location")
+            Required: =false
+            Update: =DataCardValue18.Text
+            Width: =590
+            X: =0
+            Y: =12
+            ZIndex: =1
+
+            DataCardKey20 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue18 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: |-
+                    =If(
+                        varDoSurvey = "roundAndSurvey",
+                        varRoundRecord.Location,
+                        "Location"
+                    )
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey20.Y + DataCardKey20.Height + 5
+                ZIndex: =2
+
+            ErrorMessage20 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue18.Y + DataCardValue18.Height
+                ZIndex: =3
+
+            StarVisible20 As label:
+                Align: =Align.Center
+                Height: =DataCardKey20.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey20.Y
+                ZIndex: =4
+
+        Round_Unit_DataCard1 As typedDataCard.textualEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="Round_Unit"
+            Default: =ThisItem.Round_Unit
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"Round_Unit")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Round_Unit")
+            Required: =false
+            Update: =DataCardValue19.Text
+            Width: =590
+            X: =0
+            Y: =13
+            ZIndex: =1
+
+            DataCardKey21 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 85, 135, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                Size: =18
+                Text: |-
+                    =LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue19 As text:
+                BorderColor: =If(IsBlank(Parent.Error), RGBA(39,116,174,1), Color.Red)
+                Color: =RGBA(0, 85, 135, 1)
+                Default: |-
+                    =If(
+                        varDoSurvey = "roundAndSurvey",
+                        varRoundRecord.R_Location.Value,
+                        "Unit"
+                    )
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Height: =50
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey21.Y + DataCardKey21.Height + 5
+                ZIndex: =2
+
+            ErrorMessage21 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue19.Y + DataCardValue19.Height
+                ZIndex: =3
+
+            StarVisible21 As label:
+                Align: =Align.Center
+                Height: =DataCardKey21.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey21.Y
+                ZIndex: =4
+
+    Label2 As label:
+        Height: =50
+        Size: =16
+        Text: =varRoundRecord.Title
+        Width: =560
+        X: =20
+        Y: =2
+        ZIndex: =10
+
+    Label3 As label:
+        Height: =44
+        Size: =16
+        Text: =varSurvStatus
+        Width: =560
+        X: =20
+        Y: =52
+        ZIndex: =11
+
+    Label4 As label:
+        Height: =48
+        Size: =16
+        Text: |
+            =varDoSurvey
+        Width: =560
+        X: =20
+        Y: =96
+        ZIndex: =12
+

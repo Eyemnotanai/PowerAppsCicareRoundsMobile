@@ -1,0 +1,75 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =//Save production URL https://apps.powerapps.com/play/0e1fa206-d4b6-463e-933e-b5881da990e9?tenantId=39c3716b-6471-4fd5-ac04-a7dbaa32782b
+        Set(currentUser,User());
+        /*** get admin user from sharepoint ***/
+        Set(varUserEmail,Lower(User().Email));
+        Set(
+            varUserRole,
+            LookUp(
+                User_Role,
+                And(Title=varUserEmail,Active=true),
+                Role.Value
+            )
+        );
+        //horizontal menu items
+        ClearCollect(
+            colHorizontalMenu,
+            {
+                Name: "Home",
+                Icon: Icon.Home,
+                Page: Home,
+                Id:1
+            },
+            {
+                Name: "Rounds History",
+                Icon: Icon.Person,
+                Page: RoundHistory,
+                Id:2
+            },
+            {
+                Name: "Ad hoc Survey",
+                Icon: Icon.People,
+                Page: AdhocSurveyLocation,
+                Id:3
+            },
+            {
+                Name: "Schedule",
+                Icon: Icon.Add,
+                Page: RoundLocation,
+                Id:4
+            },
+            {
+                Name: "Info",
+                Icon: Icon.Information,
+                Page: CICAREScripts,
+                Id:5
+            }
+        );
+        
+        //***** timer
+        //Duration for timer in each screen
+        Set(varTimeDuration, 60000*30);
+        //Session time for each screen. 1=1 minute
+        Set(varSessionTime, 1);
+        //Time for session end warning. 30 second
+        /*Set(varWarnTime, 1000*30);*/
+        //set the timer to true for test
+        Set(varTimerFlag, false);
+        
+        //write to audit log
+        Patch(
+            Audit_Log,
+            Defaults(Audit_Log),
+            {
+                Title: User().Email & " ",
+                Activity: "Starting.../mobile.",
+                LocationLong: Location.Longitude,
+                LocationLat: Location.Latitude
+            }
+        );
+        //Set time for session timeout
+        Set(lastActivityTime, Now());
+    StartScreen: =Home
+

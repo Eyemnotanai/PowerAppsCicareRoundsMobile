@@ -1,0 +1,36 @@
+UserLogOutCountDown As screen:
+    Fill: =RGBA(236, 236, 236, 1)
+    OnVisible: |
+        =//write to audit log
+        Patch(
+            Audit_Log,
+            Defaults(Audit_Log),
+            {
+                Title: User().Email & " User Log Out Count Down page",
+                Activity: App.ActiveScreen.Name & "/Mobile app",
+                LocationLong: Location.Longitude,
+                LocationLat: Location.Latitude
+            }
+        );
+
+    tmCountDown As timer:
+        Duration: =varTimeDuration
+        Height: =70
+        OnTimerEnd: |-
+            =If(
+                DateDiff(
+                    lastActivityTime,
+                    Now(),
+                    TimeUnit.Minutes
+                ) > varSessionTime,
+                //Launch("https://make.powerapps.com/",{}, LaunchTarget.Replace);
+                //Launch("https://make.powerapps.com/");
+                //Exit(true)
+                Navigate(UserLogOutCountDown, ScreenTransition.None)
+            )
+        Visible: =varTimerFlag
+        Width: =280
+        X: =80
+        Y: =1066
+        ZIndex: =8
+

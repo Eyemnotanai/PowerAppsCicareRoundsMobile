@@ -1,0 +1,78 @@
+Tabs As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =120
+    HomePage: =App.ActiveScreen
+    Items: |-
+        =Table(
+            {
+                Name: "Home",
+                Icon: Icon.Home,
+                Page: App.ActiveScreen,
+                Id:1
+            },
+            {
+                Name: "My Rounds",
+                Icon: Icon.Person,
+                Page: App.ActiveScreen,
+                Id:2
+            },
+            {
+                Name: "Ad hoc Survey",
+                Icon: Icon.People,
+                Page: App.ActiveScreen,
+                Id:3
+            },
+            {
+                Name: "Book",
+                Icon: Icon.Add,
+                Page: App.ActiveScreen,
+                Id:4
+            },
+            {
+                Name: "Info",
+                Icon: Icon.Information,
+                Page: App.ActiveScreen,
+                Id:5
+            }
+        )
+    Width: =640
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    rectUpBord As rectangle:
+        Height: =2
+        Width: =Parent.Width
+        ZIndex: =1
+
+    galTabsMenu As gallery.galleryHorizontal:
+        DelayItemLoading: =true
+        Height: =120
+        Items: =Tabs.Items
+        LoadingSpinner: =LoadingSpinner.Data
+        OnSelect: =Navigate(ThisItem.Page)
+        TemplatePadding: =0
+        TemplateSize: =125
+        ZIndex: =2
+
+        iconTabsMenuIcon As icon.Home:
+            Height: =40
+            Icon: =ThisItem.Icon
+            OnSelect: =Select(Parent)
+            Width: =40
+            X: =40
+            Y: =20
+            ZIndex: =1
+
+        lblTabsMenuName As label:
+            Align: =Align.Center
+            Height: =45
+            OnSelect: =Select(Parent)
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =12
+            Text: =ThisItem.Name
+            Width: =116
+            Y: =iconTabsMenuIcon.Y+iconTabsMenuIcon.Height
+            ZIndex: =2
+

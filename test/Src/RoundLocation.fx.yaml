@@ -1,0 +1,376 @@
+RoundLocation As screen:
+    Fill: =RGBA(236, 236, 236, 1)
+    OnVisible: |+
+        =//write to audit log
+        Patch(
+            Audit_Log,
+            Defaults(Audit_Log),
+            {
+                Title: User().Email,
+                Activity: App.ActiveScreen.Name  & "/mobile.",
+                LocationLong: Location.Longitude,
+                LocationLat: Location.Latitude
+            }
+        );
+        
+        //Set time for session timeout
+        Set(lastActivityTime, Now());
+        Reset(tmCountDown);
+        
+        Refresh(Rounds_Schedule);  //refresh the sharepoint list to get latest schedules
+        Refresh(Rounds_Calendar);   //refresh the sharepoint list to prevent dulplicate round schedule
+        
+        UpdateContext({varResetCheckbox:true});  //reset checkbox
+        UpdateContext({varResetCheckbox:false}); //don't reset the checkbox when the page is active  
+        
+        //if location checkbox (chkRDLocationRR or chkRDLocationSM) is un-selected, disable the "Continue" button
+        UpdateContext({varLocIsSelected:false});  
+        
+
+    tabRDLocation As Tabs:
+        Items: =colHorizontalMenu
+        Y: =htmlHomeBack.Y+htmlHomeBack.Height
+
+    tmRDLocation As timer:
+        Duration: =varTimeDuration
+        Height: =70
+        OnTimerEnd: |-
+            =If(
+                DateDiff(
+                    lastActivityTime,
+                    Now(),
+                    TimeUnit.Minutes
+                ) > varSessionTime,
+                //Launch("https://make.powerapps.com/",{}, LaunchTarget.Replace);
+                //Launch("https://make.powerapps.com/");
+                //Exit(true)
+                Navigate(UserLogOutCountDown, ScreenTransition.None)
+            )
+        Visible: =varTimerFlag
+        Width: =280
+        X: =20
+        Y: =1036
+        ZIndex: =2
+
+    htmlNewRdSch_1 As htmlViewer:
+        Height: =900
+        HtmlText: |-
+            ="<div style='border-radius:10%;height:750px;overflow:auto;margin:0;padding:0;width:100%;background-color:#FCFCFC'></div>"
+        PaddingBottom: =0
+        PaddingLeft: =0
+        PaddingRight: =0
+        PaddingTop: =0
+        Width: =610
+        X: =15
+        Y: =rectRDLocationHader.Y+rectRDLocationHader.Height-28
+        ZIndex: =6
+
+    bntRDLocationSubmit As button:
+        DisplayMode: |-
+            =If(
+                varLocIsSelected,
+                DisplayMode.Edit,
+                DisplayMode.Disabled
+            )
+        Fill: =RGBA(0, 85, 135, 1)
+        Height: =70
+        OnSelect: |-
+            =//logging activites
+            
+            //refresh time for the timeout
+            Set(lastActivityTime, Now());
+            
+            
+            //write to audit log
+            Patch(
+                Audit_Log,
+                Defaults(Audit_Log),
+                {
+                    Title: User().Email & " Round Location",
+                    Activity: App.ActiveScreen.Name  & "/mobile. Back to home page from Round location page",
+                    LocationLong: Location.Longitude,
+                    LocationLat: Location.Latitude
+                }
+            );
+            
+            //Set time for session timeout
+            Set(lastActivityTime, Now());
+            //reset the timer for the UserLogOutCountDown
+            Reset(tmCountDown);
+            
+            
+            Set(startTime, galRDLocationInfo.Selected.'Start Time');
+            Set(endTime, galRDLocationInfo.Selected.'End Time');
+            
+            
+            
+            If(varLocIsSelected,
+                Navigate(RoundUnits)
+            )
+        Size: =24
+        Text: ="Continue"
+        Width: =200
+        X: =343
+        Y: =900
+        ZIndex: =7
+
+    bntRDLocationBack As button:
+        Fill: =RGBA(128, 128, 128, 1)
+        Height: =70
+        HoverFill: =RGBA(128, 128, 128, 1)
+        OnSelect: |-
+            =//write to audit log
+            Patch(
+                Audit_Log,
+                Defaults(Audit_Log),
+                {
+                    Title: User().Email & " Round Location",
+                    Activity: App.ActiveScreen.Name  & "/mobile. Back to home page from Round location page",
+                    LocationLong: Location.Longitude,
+                    LocationLat: Location.Latitude
+                }
+            );
+            
+            //Set time for session timeout
+            Set(lastActivityTime, Now());
+            //reset the timer for the UserLogOutCountDown
+            Reset(tmCountDown);
+            
+            //back to previous page
+            Back();
+        PressedFill: =RGBA(128, 128, 128, 1)
+        Size: =24
+        Text: ="Back"
+        Width: =200
+        X: =97
+        Y: =900
+        ZIndex: =8
+
+    galRDLocationInfo As gallery.galleryVertical:
+        Height: =656
+        Items: |-
+            =SortByColumns(
+                Filter(
+                    Rounds_Schedule,
+                    'Start Time' >= Now()
+                ),
+                "EventDate",
+                SortOrder.Ascending
+            )
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =100
+        Width: =575
+        X: =33
+        Y: =191
+        ZIndex: =9
+
+        Rectangle1 As rectangle:
+            Fill: =RGBA(135, 78, 181, 1)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =1
+
+        chkRDLocationSM As checkbox:
+            CheckboxBorderColor: =RGBA(0,85, 135, 1)
+            CheckboxSize: =40
+            Color: =RGBA(0,85, 135, 1)
+            Height: =40
+            OnCheck: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " Round Location",
+                        Activity: App.ActiveScreen.Name  & "/mobile. On Check " & ThisItem.Location,
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                Set(lastActivityTime, Now());   //Set time for session timeout
+                Reset(tmCountDown);     //reset the timer for the UserLogOutCountDown
+                
+                //save values of the selected items to the following three variables for submitting form
+                Set(varLocation, "SM");
+                Set(varStartTime, galRDLocationInfo.Selected.'Start Time');
+                Set(varEndTime, galRDLocationInfo.Selected.'End Time');
+                
+                UpdateContext({varLocIsSelected:true}); //enable the "Continue" button if the checkbox is checked
+                Navigate(RoundUnits);
+            OnSelect: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " Round Location",
+                        Activity: App.ActiveScreen.Name  & "/mobile. On Select " & ThisItem.Location,
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+            OnUncheck: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " Round Location",
+                        Activity: App.ActiveScreen.Name  & "/mobile. On UnCheck " & ThisItem.Location,
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                Set(lastActivityTime, Now());   //Set time for session timeout
+                Reset(tmCountDown);     //reset the timer for the UserLogOutCountDown
+                
+                UpdateContext({varLocIsSelected:false});    //disable the "Continue" button if the checkbox is unchecked
+            Size: =16
+            Text: ="SM"
+            Visible: =IsMatch(ThisItem.Location, "SM", MatchOptions.Contains )
+            Width: =80
+            X: |-
+                =If(
+                    IsMatch(
+                        ThisItem.Location,
+                        "RR",
+                        MatchOptions.Contains
+                    ),
+                    482,       //next to RR object
+                    lblRDLocationTitle.X + lblRDLocationTitle.Width //there is no RR object
+                )
+            Y: =40
+            ZIndex: =2
+
+        chkRDLocationRR As checkbox:
+            CheckboxBorderColor: =RGBA(0,85, 135, 1)
+            CheckboxSize: =40
+            Color: =RGBA(0,85, 135, 1)
+            Height: =40
+            OnCheck: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " Round Location",
+                        Activity: App.ActiveScreen.Name  & "/mobile. On Check " & ThisItem.Location,
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                Set(lastActivityTime, Now());   //Set time for session timeout
+                Reset(tmCountDown);     //reset the timer for the UserLogOutCountDown
+                
+                //save values of the selected items to the following three variables for submitting form
+                Set(varLocation, "RR");
+                Set(varScheduleID, ThisItem.ID);
+                Set(varStartTime, galRDLocationInfo.Selected.'Start Time');
+                Set(varEndTime, galRDLocationInfo.Selected.'End Time');
+                
+                UpdateContext({varLocIsSelected:true}); //enable the "Continue" button if the checkbox is checked
+                Navigate(RoundUnits);
+            OnSelect: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " Round Location",
+                        Activity: App.ActiveScreen.Name  & "/mobile. On Select " & ThisItem.Location,
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+            OnUncheck: |-
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email & " Round Location",
+                        Activity: App.ActiveScreen.Name  & "/mobile. On UnCheck " & ThisItem.Location,
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                UpdateContext({varLocIsSelected:false});    //disable the "Continue" button if the checkbox is unchecked
+            Reset: =varResetCheckbox
+            Size: =16
+            Text: ="RR"
+            Visible: =IsMatch(ThisItem.Location, "RR", MatchOptions.Contains )
+            Width: =80
+            X: =lblRDLocationTitle.X+lblRDLocationTitle.Width
+            Y: =40
+            ZIndex: =3
+
+        lblRDLocationDateTime As label:
+            Color: =RGBA(0,85, 135, 1)
+            OnSelect: =Select(Parent)
+            Size: =12
+            Text: =ThisItem.'Start Time' & " To " & Text(ThisItem.'End Time',DateTimeFormat.ShortTime)
+            Width: =300
+            X: =12
+            Y: =50
+            ZIndex: =4
+
+        lblRDLocationTitle As label:
+            Color: =RGBA(0,85, 135, 1)
+            FontWeight: =FontWeight.Semibold
+            OnSelect: =Select(Parent)
+            Size: =12
+            Text: =ThisItem.Title
+            Width: =390
+            X: =12
+            Y: =20
+            ZIndex: =5
+
+    grpRDLocationHeader As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =9
+
+        imgRDLocationHeader As image:
+            Height: =150
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            ZIndex: =3
+
+        rectRDLocationHader As rectangle:
+            Fill: =RGBA(39, 116, 181, 0.65)
+            Height: =150
+            Width: =640
+            ZIndex: =4
+
+        lblRDLocationHeader As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =110
+            Size: =32
+            Text: ="Select a Round Schedule"
+            Width: =640
+            ZIndex: =5
+

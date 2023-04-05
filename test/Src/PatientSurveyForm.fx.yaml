@@ -1,0 +1,84 @@
+PatientSurveyForm As screen:
+    Fill: =RGBA(236, 236, 236, 1)
+    OnVisible: |-
+        =//write to audit log
+        Patch(
+            Audit_Log,
+            Defaults(Audit_Log),
+            {
+                Title: User().Email,
+                Activity: App.ActiveScreen.Name & "/mobile",
+                LocationLong: Location.Longitude,
+                LocationLat: Location.Latitude
+            }
+        );
+        //Set time for session timeout
+        Set(lastActivityTime, Now());
+        //reset timer for UserLogOutCountDown page
+        Reset(tmCountDown);
+        
+        //parameters from home page
+        /*
+        varDoSurvey:"roundAndSurvey"
+        varSurvStatus:"new"
+        varRoundRecord
+        */
+
+    tabStaffSurveyForm_2 As Tabs:
+        Items: =colHorizontalMenu
+        Y: =htmlHomeBack.Y+htmlHomeBack.Height
+
+    htmlHomeBack_3 As htmlViewer:
+        Height: =885
+        HtmlText: |-
+            ="<div style='border:1px gray;border-radius:10%;height:750px;width:100%;background-color:#FCFCFC'></div>"
+        Width: =610
+        X: =15
+        Y: =imgStaffSurvHead_2.Y+imgStaffSurvHead_2.Height-28
+        ZIndex: =5
+
+    Label1_3 As label:
+        Align: =Align.Center
+        Color: =RGBA(255, 0, 0, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =122
+        Size: =30
+        Text: ="Coming Soon"
+        Width: =560
+        X: =42
+        Y: =362
+        ZIndex: =6
+
+    grpStaffSurveyHead_2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =6
+
+        imgStaffSurvHead_2 As image:
+            Height: =150
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            Y: =5
+            ZIndex: =2
+
+        rectStaffSurvHeadBG_2 As rectangle:
+            Fill: =RGBA(39, 116, 181, 0.65)
+            Height: =150
+            Width: =640
+            Y: =5
+            ZIndex: =3
+
+        lblStaffSurvHead_2 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =150
+            Size: =32
+            Text: ="Patient Survey"
+            Width: =640
+            Y: =5
+            ZIndex: =4
+

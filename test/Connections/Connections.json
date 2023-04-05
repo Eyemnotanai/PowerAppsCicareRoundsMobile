@@ -1,0 +1,134 @@
+{
+  "295eb346-3860-4060-808f-13b6b433bb60": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Users",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/laborbol/releases/ase-v3/1.0.1622.3202/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Users"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "295eb346-3860-4060-808f-13b6b433bb60"
+  },
+  "a6c184cd-79ef-4bc8-b1a8-36c15be80507": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1623/1.0.1623.3210/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://uclahs.sharepoint.com/teams/iss/migration/CICARE_Rounds_Test_V2": {
+        "datasetOverride": {
+          "environmentVariableName": "new_shared_sharepointonline_edc77271861549c1b6dca8d634051df3",
+          "name": "https://uclahs.sharepoint.com/teams/iss/migration/CICARE_Rounds_Test_V2"
+        },
+        "dataSources": {
+          "Audit_Log": {
+            "tableName": "a1932de5-bb34-4d25-b31c-6767df6a38eb",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_b04b9679b1d848069611d140302e506a",
+              "name": "a1932de5-bb34-4d25-b31c-6767df6a38eb"
+            }
+          },
+          "Notification_Cancelled_Rounds": {
+            "tableName": "5acda686-9c96-4250-9b2b-d5f2d130e863",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_0d7e65decc944a1bb78ea70948df9a35",
+              "name": "5acda686-9c96-4250-9b2b-d5f2d130e863"
+            }
+          },
+          "Rounds_Calendar": {
+            "tableName": "Rounds_Calendar",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_dcb59ed412fb4f4faaa632dda8db3f3b",
+              "name": "Rounds_Calendar"
+            }
+          },
+          "Rounds_Location": {
+            "tableName": "cf4f4b86-83b6-43f1-ab6d-b1844e7fdb33",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_e96350d6d48b4cabbec0b6c0fc0398f7",
+              "name": "cf4f4b86-83b6-43f1-ab6d-b1844e7fdb33"
+            }
+          },
+          "Rounds_Schedule": {
+            "tableName": "Rounds_Schedule",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_7338f033125342378d0b080e382f587b",
+              "name": "Rounds_Schedule"
+            }
+          },
+          "Staff_Survey": {
+            "tableName": "58e4ef0a-f84e-498c-96ab-bcc3f67ebae5",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_efc6d964e23240e9b58ce2bf95d20bd1",
+              "name": "58e4ef0a-f84e-498c-96ab-bcc3f67ebae5"
+            }
+          },
+          "Survey_Questions": {
+            "tableName": "51f724d6-4c6f-43e9-87cc-aac850903f03",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_50eb276946884a07a93648c348e7737a",
+              "name": "51f724d6-4c6f-43e9-87cc-aac850903f03"
+            }
+          },
+          "User_Role": {
+            "tableName": "d1da66ba-fc67-4cf8-b38c-c142e5470588",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_65e6712e52a842068269cea7df525883",
+              "name": "d1da66ba-fc67-4cf8-b38c-c142e5470588"
+            }
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Audit_Log",
+      "Staff_Survey",
+      "User_Role",
+      "Rounds_Schedule",
+      "Rounds_Location",
+      "Rounds_Calendar",
+      "Notification_Cancelled_Rounds",
+      "Survey_Questions"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "a6c184cd-79ef-4bc8-b1a8-36c15be80507"
+  },
+  "bef6634e-82ad-4b5f-aead-5865bae72727": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Outlook",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1624/1.0.1624.3220/office365/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Outlook"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "bef6634e-82ad-4b5f-aead-5865bae72727"
+  }
+}
