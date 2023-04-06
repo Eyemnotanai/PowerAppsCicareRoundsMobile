@@ -1,0 +1,170 @@
+SurveyConfirm As screen:
+    OnVisible: |-
+        =//write to audit log
+        Patch(
+            Audit_Log,
+            Defaults(Audit_Log),
+            {
+                Title: User().Email,
+                Activity: App.ActiveScreen.Name & "/mobile",
+                LocationLong: Location.Longitude,
+                LocationLat: Location.Latitude
+            }
+        );
+        //Set time for session timeout
+        Set(lastActivityTime, Now());
+        //reset timer for UserLogOutCountDown page
+        Reset(tmCountDown);
+
+    tmSurveySuccess As timer:
+        Duration: =varTimeDuration
+        Height: =70
+        OnTimerEnd: |-
+            =If(
+                DateDiff(
+                    lastActivityTime,
+                    Now(),
+                    TimeUnit.Minutes
+                ) > varSessionTime,
+                //Launch("https://make.powerapps.com/",{}, LaunchTarget.Replace);
+                //Launch("https://make.powerapps.com/");
+                //Exit(true)
+                Navigate(UserLogOutCountDown, ScreenTransition.None)
+            )
+        Visible: =false
+        Width: =280
+        Y: =1062
+        ZIndex: =1
+
+    tabSurveySuccess As Tabs:
+        Items: =colHorizontalMenu
+        Y: =htmlHomeBack.Y+htmlHomeBack.Height
+        ZIndex: =2
+
+    grpSurveySuccessHead As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =5
+
+        imgSurveySuccessHead As image:
+            Height: =150
+            Image: =abstractBackground
+            ImagePosition: =ImagePosition.Fill
+            Width: =640
+            ZIndex: =3
+
+        rectSurveySuccessHead As rectangle:
+            Fill: =RGBA(39, 116, 181, 0.65)
+            Height: =150
+            Width: =640
+            ZIndex: =4
+
+        lblSurveySuccessHead As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =150
+            Size: =32
+            Text: ="Success"
+            Width: =640
+            ZIndex: =5
+
+    htmlSurveySuccess As htmlViewer:
+        Height: =885
+        HtmlText: |-
+            ="<div style='border:1px gray;border-radius:10%;height:790px;width:100%;background-color:#FCFCFC'></div>"
+        Width: =610
+        X: =15
+        Y: =imgStaffSurvHead.Y+imgStaffSurvHead.Height-28
+        ZIndex: =6
+
+    Label6 As label:
+        Color: =RGBA(0, 85, 135, 1)
+        FontWeight: =FontWeight.Semibold
+        Height: =70
+        Italic: =true
+        Size: =21
+        Text: =If(varRoundRecord.Location="RR", varRRMeetLocation, varSMMeetLocation)
+        Width: =520
+        X: =72
+        Y: =756
+        ZIndex: =13
+
+    grpSurvSuccessConfirm As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =13
+
+        tmSurveySuccess2Home As timer:
+            AutoStart: =true
+            Duration: =4000
+            Height: =70
+            OnTimerEnd: |-
+                =If(
+                    varRefreshWhat = "Staff",
+                    Refresh(Staff_Survey)
+                );
+                Navigate(Home)
+            Visible: =false
+            Width: =291
+            X: =34
+            Y: =942
+            ZIndex: =7
+
+        iconSurvConfirmCircle As circle.Circle:
+            Fill: =RGBA(39, 116, 174, 1)
+            Width: =104
+            X: =287
+            Y: =470
+            ZIndex: =8
+
+        iconSurvConfirmCheck As icon.Check:
+            Height: =100
+            Icon: =Icon.Check
+            PaddingBottom: =Self.PaddingTop
+            PaddingLeft: =Self.PaddingTop
+            PaddingRight: =Self.PaddingTop
+            PaddingTop: =18
+            Width: =104
+            X: =287
+            Y: =470
+            ZIndex: =9
+
+        LblSurvConfirmMSG As label:
+            Color: =RGBA(0, 85, 135, 1)
+            Height: =127
+            Size: =21
+            Text: |-
+                ="Thank you for completing the CICARE Round " & If(varRefreshWhat = "Staff", " Staff ") & "Survey. You may now attend the debrief session at: "
+            Width: =520
+            X: =72
+            Y: =614
+            ZIndex: =10
+
+        lblSurvConfirmRundTitle As label:
+            BorderColor: =RGBA(101, 128, 187, 1)
+            Color: =RGBA(0, 85, 135, 1)
+            DisabledColor: =ColorFade(RGBA(47, 41, 43, 1), 70%)
+            Height: =70
+            Size: =16
+            Text: =varRoundRecord.Title
+            Width: =520
+            X: =72
+            Y: =323
+            ZIndex: =11
+
+        lblSurvConfirmTitle As label:
+            Color: =RGBA(0, 85, 135, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =70
+            Size: =21
+            Text: ="CICARE Round for "
+            Width: =520
+            X: =72
+            Y: =253
+            ZIndex: =12
+

@@ -14,86 +14,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 22,
-                  "charOffset": 259,
-                  "snippet": {
-                    "text": "Lower(Attendees.Email)"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Items",
-                "module": "Home",
-                "type": "Home.galMyReservationsPreview"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Filter"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 1,
-                  "charOffset": 282,
-                  "snippet": {
-                    "text": "="
-                  }
-                }
-              },
-              "properties": {
-                "member": "Items",
-                "module": "Home",
-                "type": "Home.galMyReservationsPreview"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Filter"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "RoundHistory.lblRHStaff.Text"
                 }
               ],
@@ -104,7 +24,7 @@
                 },
                 "region": {
                   "charLength": 11,
-                  "charOffset": 142,
+                  "charOffset": 148,
                   "snippet": {
                     "text": "colSurvList"
                   }
@@ -127,7 +47,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -143,10 +63,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 129,
-                  "charOffset": 110,
+                  "charLength": 132,
+                  "charOffset": 115,
                   "snippet": {
-                    "text": "Filter(\n                        colSurvList,\n                        Lower(CreatedBy) = Lower(User().Email)\n                    )"
+                    "text": "Filter(\r\n                        colSurvList,\r\n                        Lower(CreatedBy) = Lower(User().Email)\r\n                    )"
                   }
                 }
               },
@@ -167,7 +87,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -184,7 +104,7 @@
                 },
                 "region": {
                   "charLength": 9,
-                  "charOffset": 185,
+                  "charOffset": 192,
                   "snippet": {
                     "text": "CreatedBy"
                   }
@@ -207,7 +127,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -224,7 +144,7 @@
                 },
                 "region": {
                   "charLength": 16,
-                  "charOffset": 179,
+                  "charOffset": 186,
                   "snippet": {
                     "text": "Lower(CreatedBy)"
                   }
@@ -247,7 +167,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -264,7 +184,7 @@
                 },
                 "region": {
                   "charLength": 10,
-                  "charOffset": 261,
+                  "charOffset": 270,
                   "snippet": {
                     "text": "SurveyType"
                   }
@@ -287,7 +207,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -304,7 +224,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 272,
+                  "charOffset": 281,
                   "snippet": {
                     "text": "="
                   }
@@ -328,7 +248,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrIncompatibleTypesForEquality-Left-Right",
-          "ruleIndex": 3
+          "ruleIndex": 2
         },
         {
           "locations": [
@@ -345,7 +265,7 @@
                 },
                 "region": {
                   "charLength": 7,
-                  "charOffset": 342,
+                  "charOffset": 354,
                   "snippet": {
                     "text": "Created"
                   }
@@ -368,7 +288,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -385,7 +305,7 @@
                 },
                 "region": {
                   "charLength": 7,
-                  "charOffset": 399,
+                  "charOffset": 412,
                   "snippet": {
                     "text": "Created"
                   }
@@ -408,7 +328,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -425,7 +345,7 @@
                 },
                 "region": {
                   "charLength": 9,
-                  "charOffset": 465,
+                  "charOffset": 481,
                   "snippet": {
                     "text": "\"Created\""
                   }
@@ -448,7 +368,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrColDNE-Name",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -464,10 +384,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 480,
-                  "charOffset": 31,
+                  "charLength": 496,
+                  "charOffset": 33,
                   "snippet": {
-                    "text": "RenameColumns(\n            Filter(\n                Filter(\n                    Filter(\n                        colSurvList,\n                        Lower(CreatedBy) = Lower(User().Email)\n                    ),\n                    SurveyType = \"Staff\"\n                ),\n                And(\n                    Created >= dateRHStart.SelectedDate,\n                    Created <= dateRHEnd\n                )\n            ),\n            \"Created\",\n            \"SurvCreated\"\n        )"
+                    "text": "RenameColumns(\r\n            Filter(\r\n                Filter(\r\n                    Filter(\r\n                        colSurvList,\r\n                        Lower(CreatedBy) = Lower(User().Email)\r\n                    ),\r\n                    SurveyType = \"Staff\"\r\n                ),\r\n                And(\r\n                    Created >= dateRHStart.SelectedDate,\r\n                    Created <= dateRHEnd\r\n                )\r\n            ),\r\n            \"Created\",\r\n            \"SurvCreated\"\r\n        )"
                   }
                 }
               },
@@ -488,7 +408,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -505,48 +425,569 @@
                 },
                 "region": {
                   "charLength": 11,
+                  "charOffset": 614,
+                  "snippet": {
+                    "text": "SurvCreated"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHStaff"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "SurvCreated"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 50,
+                  "charOffset": 591,
+                  "snippet": {
+                    "text": "DateDiff('Start Time', SurvCreated, TimeUnit.Days)"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHStaff"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "LookUp"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint",
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 1,
+                  "charOffset": 641,
+                  "snippet": {
+                    "text": "="
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHStaff"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "LookUp"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint",
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 11,
+                  "charOffset": 148,
+                  "snippet": {
+                    "text": "colSurvList"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "colSurvList"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 132,
+                  "charOffset": 115,
+                  "snippet": {
+                    "text": "Filter(\r\n                        colSurvList,\r\n                        Lower(CreatedBy) = Lower(User().Email)\r\n                    )"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Filter"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidArgs-Func",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 9,
+                  "charOffset": 192,
+                  "snippet": {
+                    "text": "CreatedBy"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "CreatedBy"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 16,
+                  "charOffset": 186,
+                  "snippet": {
+                    "text": "Lower(CreatedBy)"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Lower"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidArgs-Func",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 10,
+                  "charOffset": 270,
+                  "snippet": {
+                    "text": "SurveyType"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "SurveyType"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 1,
+                  "charOffset": 281,
+                  "snippet": {
+                    "text": "="
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Error",
+              "Text"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrIncompatibleTypesForEquality-Left-Right",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 7,
+                  "charOffset": 356,
+                  "snippet": {
+                    "text": "Created"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Created"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 7,
+                  "charOffset": 414,
+                  "snippet": {
+                    "text": "Created"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Created"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 9,
+                  "charOffset": 483,
+                  "snippet": {
+                    "text": "\"Created\""
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Created"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrColDNE-Name",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 498,
+                  "charOffset": 33,
+                  "snippet": {
+                    "text": "RenameColumns(\r\n            Filter(\r\n                Filter(\r\n                    Filter(\r\n                        colSurvList,\r\n                        Lower(CreatedBy) = Lower(User().Email)\r\n                    ),\r\n                    SurveyType = \"Patient\"\r\n                ),\r\n                And(\r\n                    Created >= dateRHStart.SelectedDate,\r\n                    Created <= dateRHEnd\r\n                )\r\n            ),\r\n            \"Created\",\r\n            \"SurvCreated\"\r\n        )"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "RenameColumns"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidArgs-Func",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 11,
+                  "charOffset": 616,
+                  "snippet": {
+                    "text": "SurvCreated"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "RoundHistory",
+                "type": "RoundHistory.lblRHPatient"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "SurvCreated"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 50,
                   "charOffset": 593,
                   "snippet": {
-                    "text": "SurvCreated"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHStaff"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "SurvCreated"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 50,
-                  "charOffset": 570,
-                  "snippet": {
                     "text": "DateDiff('Start Time', SurvCreated, TimeUnit.Days)"
                   }
                 }
@@ -554,7 +995,7 @@
               "properties": {
                 "member": "Text",
                 "module": "RoundHistory",
-                "type": "RoundHistory.lblRHStaff"
+                "type": "RoundHistory.lblRHPatient"
               }
             }
           ],
@@ -568,407 +1009,6 @@
             "level": "Medium"
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHStaff.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 1,
-                  "charOffset": 620,
-                  "snippet": {
-                    "text": "="
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHStaff"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "LookUp"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 11,
-                  "charOffset": 142,
-                  "snippet": {
-                    "text": "colSurvList"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "colSurvList"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 129,
-                  "charOffset": 110,
-                  "snippet": {
-                    "text": "Filter(\n                        colSurvList,\n                        Lower(CreatedBy) = Lower(User().Email)\n                    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Filter"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 9,
-                  "charOffset": 185,
-                  "snippet": {
-                    "text": "CreatedBy"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "CreatedBy"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 16,
-                  "charOffset": 179,
-                  "snippet": {
-                    "text": "Lower(CreatedBy)"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Lower"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 10,
-                  "charOffset": 261,
-                  "snippet": {
-                    "text": "SurveyType"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "SurveyType"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 1,
-                  "charOffset": 272,
-                  "snippet": {
-                    "text": "="
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Error",
-              "Text"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrIncompatibleTypesForEquality-Left-Right",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 7,
-                  "charOffset": 344,
-                  "snippet": {
-                    "text": "Created"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Created"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 7,
-                  "charOffset": 401,
-                  "snippet": {
-                    "text": "Created"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Created"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 9,
-                  "charOffset": 467,
-                  "snippet": {
-                    "text": "\"Created\""
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Created"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrColDNE-Name",
           "ruleIndex": 4
         },
         {
@@ -985,128 +1025,8 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 482,
-                  "charOffset": 31,
-                  "snippet": {
-                    "text": "RenameColumns(\n            Filter(\n                Filter(\n                    Filter(\n                        colSurvList,\n                        Lower(CreatedBy) = Lower(User().Email)\n                    ),\n                    SurveyType = \"Patient\"\n                ),\n                And(\n                    Created >= dateRHStart.SelectedDate,\n                    Created <= dateRHEnd\n                )\n            ),\n            \"Created\",\n            \"SurvCreated\"\n        )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "RenameColumns"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 11,
-                  "charOffset": 595,
-                  "snippet": {
-                    "text": "SurvCreated"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "SurvCreated"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 50,
-                  "charOffset": 572,
-                  "snippet": {
-                    "text": "DateDiff('Start Time', SurvCreated, TimeUnit.Days)"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Text",
-                "module": "RoundHistory",
-                "type": "RoundHistory.lblRHPatient"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "LookUp"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.lblRHPatient.Text",
-                  "relativeAddress": 0
-                },
-                "region": {
                   "charLength": 1,
-                  "charOffset": 622,
+                  "charOffset": 643,
                   "snippet": {
                     "text": "="
                   }
@@ -1129,7 +1049,7 @@
             "level": "Medium"
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -1169,7 +1089,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -1209,7 +1129,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -1249,7 +1169,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -1289,7 +1209,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -1329,7 +1249,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -1370,7 +1290,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrIncompatibleTypesForEquality-Left-Right",
-          "ruleIndex": 3
+          "ruleIndex": 2
         },
         {
           "locations": [
@@ -1410,7 +1330,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -1450,7 +1370,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -1490,7 +1410,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrColDNE-Name",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -1530,7 +1450,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -1570,7 +1490,7 @@
             "level": "High"
           },
           "ruleId": "app-ErrInvalidName",
-          "ruleIndex": 1
+          "ruleIndex": 0
         },
         {
           "locations": [
@@ -1610,7 +1530,7 @@
             "level": "Medium"
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -1650,47 +1570,7 @@
             "level": "Medium"
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.Items"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.Items",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 281,
-                  "charOffset": 222,
-                  "snippet": {
-                    "text": "If(\r\n                            Or(radAdhocLocation.Selected.Value=\"RR\",radAdhocLocation.Selected.Value=\"SM\"), \r\n                            Location = radAdhocLocation.Selected.Value,\r\n                            And(Location <> \"RR\", Location <> \"SM\")\r\n                        )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "Items",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.galAdhocLocationList"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "Filter"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -1770,7 +1650,7 @@
             "level": "Medium"
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -1850,7 +1730,7 @@
             "level": "Medium"
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -1867,7 +1747,7 @@
                 },
                 "region": {
                   "charLength": 12,
-                  "charOffset": 167,
+                  "charOffset": 174,
                   "snippet": {
                     "text": "'Start Time'"
                   }
@@ -1907,7 +1787,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 180,
+                  "charOffset": 187,
                   "snippet": {
                     "text": "="
                   }
@@ -1930,7 +1810,127 @@
             "level": "Medium"
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
-          "ruleIndex": 0
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.Items"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.Items",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 281,
+                  "charOffset": 222,
+                  "snippet": {
+                    "text": "If(\r\n                            Or(radAdhocLocation.Selected.Value=\"RR\",radAdhocLocation.Selected.Value=\"SM\"), \r\n                            Location = radAdhocLocation.Selected.Value,\r\n                            And(Location <> \"RR\", Location <> \"SM\")\r\n                        )"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Items",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.galAdhocLocationList"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Filter"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint",
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 22,
+                  "charOffset": 267,
+                  "snippet": {
+                    "text": "Lower(Attendees.Email)"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Items",
+                "module": "Home",
+                "type": "Home.galMyReservationsPreview"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Filter"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint",
+          "ruleIndex": 4
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.Items",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 1,
+                  "charOffset": 290,
+                  "snippet": {
+                    "text": "="
+                  }
+                }
+              },
+              "properties": {
+                "member": "Items",
+                "module": "Home",
+                "type": "Home.galMyReservationsPreview"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Filter"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint",
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -2111,216 +2111,6 @@
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
           "ruleIndex": 7
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.galHomeMenu.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.galHomeMenu.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "Home",
-                "type": "Home.galHomeMenu"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.galHomeMenu.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.galHomeMenu.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "Home",
-                "type": "Home.galHomeMenu"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 7
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "Home",
-                "type": "Home.iconHomeTaskRoundClose"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "Home",
-                "type": "Home.iconHomeTaskRoundClose"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 7
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "Home",
-                "type": "Home.galMyReservationsPreview"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.galMyReservationsPreview.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "Home",
-                "type": "Home.galMyReservationsPreview"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 7
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Home.radHomeSurvType.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Home.radHomeSurvType.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "Home",
-                "type": "Home.radHomeSurvType"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
         },
         {
           "locations": [
@@ -2747,186 +2537,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "AdhocSurveyLocation.radAdHocSurvCategoy.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.radAdHocSurvCategoy.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.radAdHocSurvCategoy"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "AdhocSurveyLocation.radAdhocLocation.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.radAdhocLocation.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.radAdhocLocation"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.galAdhocLocationMenu"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.galAdhocLocationMenu"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 7
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.galAdhocLocationList"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.galAdhocLocationList"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 7
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "RoundLocation.galRDLocationInfo.AccessibleLabel"
                 }
               ],
@@ -2970,6 +2580,66 @@
                 "member": "TabIndex",
                 "module": "RoundLocation",
                 "type": "RoundLocation.galRDLocationInfo"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 7
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundUnits.galRDUnits.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundUnits.galRDUnits.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "RoundUnits",
+                "type": "RoundUnits.galRDUnits"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RoundUnits.galRDUnits.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "RoundUnits.galRDUnits.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "RoundUnits",
+                "type": "RoundUnits.galRDUnits"
               }
             }
           ],
@@ -3120,6 +2790,36 @@
                 "member": "AccessibleLabel",
                 "module": "StaffSurveyForm",
                 "type": "StaffSurveyForm.frmStaff.Resources_Needed_DataCard1.DataCardValue10"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.CICARE_Practice_Rating_DataCard1.radStaffRating.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.CICARE_Practice_Rating_DataCard1.radStaffRating.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "StaffSurveyForm",
+                "type": "StaffSurveyForm.frmStaff.CICARE_Practice_Rating_DataCard1.radStaffRating"
               }
             }
           ],
@@ -3390,6 +3090,426 @@
                 "member": "AccessibleLabel",
                 "module": "StaffSurveyForm",
                 "type": "StaffSurveyForm.frmStaff.Round_Unit_DataCard1.DataCardValue19"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.RoundID_DataCard1.DataCardValue11.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.RoundID_DataCard1.DataCardValue11.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "StaffSurveyForm",
+                "type": "StaffSurveyForm.frmStaff.RoundID_DataCard1.DataCardValue11"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.radAdHocSurvCategoy.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.radAdHocSurvCategoy.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.radAdHocSurvCategoy"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.radAdhocLocation.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.radAdhocLocation.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.radAdhocLocation"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.galAdhocLocationMenu"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationMenu.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.galAdhocLocationMenu"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 7
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.galAdhocLocationList"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.galAdhocLocationList.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.galAdhocLocationList"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 7
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.galHomeMenu.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.galHomeMenu.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.galHomeMenu"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.galHomeMenu.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.galHomeMenu.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Home",
+                "type": "Home.galHomeMenu"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 7
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.iconHomeTaskRoundClose"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.iconHomeTaskRoundClose.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Home",
+                "type": "Home.iconHomeTaskRoundClose"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 7
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.galMyReservationsPreview"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.galMyReservationsPreview.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Home",
+                "type": "Home.galMyReservationsPreview"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 7
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.radHomeSurvType.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.radHomeSurvType.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.radHomeSurvType"
               }
             }
           ],
@@ -3707,126 +3827,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "RoundUnits.galRDUnits.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundUnits.galRDUnits.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "RoundUnits",
-                "type": "RoundUnits.galRDUnits"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundUnits.galRDUnits.TabIndex"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundUnits.galRDUnits.TabIndex",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "TabIndex",
-                "module": "RoundUnits",
-                "type": "RoundUnits.galRDUnits"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 7
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.CICARE_Practice_Rating_DataCard1.radStaffRating.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.CICARE_Practice_Rating_DataCard1.radStaffRating.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "StaffSurveyForm",
-                "type": "StaffSurveyForm.frmStaff.CICARE_Practice_Rating_DataCard1.radStaffRating"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 6
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "App.currentUser"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "App.currentUser",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "currentUser",
-                "module": "App",
-                "type": "App"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 8
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "App.varUserRole"
                 }
               ],
@@ -3857,19 +3857,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Home.varHomeShadowShow"
+                  "fullyQualifiedName": "App.currentUser"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Home.varHomeShadowShow",
+                  "fullyQualifiedName": "App.currentUser",
                   "relativeAddress": 0
                 }
               },
               "properties": {
-                "member": "varHomeShadowShow",
-                "module": "Home",
-                "type": "Home"
+                "member": "currentUser",
+                "module": "App",
+                "type": "App"
               }
             }
           ],
@@ -3881,186 +3881,6 @@
           },
           "ruleId": "app-UnusedVariables",
           "ruleIndex": 8
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundHistory.tabRoundHistory.Y"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundHistory.tabRoundHistory.Y",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Y",
-                "module": "RoundHistory",
-                "type": "RoundHistory.tabRoundHistory"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 9
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "AdhocSurveyLocation.tabSurveyLocation.Y"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "AdhocSurveyLocation.tabSurveyLocation.Y",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Y",
-                "module": "AdhocSurveyLocation",
-                "type": "AdhocSurveyLocation.tabSurveyLocation"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 9
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "RoundLocation.tabRDLocation.Y"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "RoundLocation.tabRDLocation.Y",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Y",
-                "module": "RoundLocation",
-                "type": "RoundLocation.tabRDLocation"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 9
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "CICAREScripts.tabCICAREScripts.Y"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "CICAREScripts.tabCICAREScripts.Y",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Y",
-                "module": "CICAREScripts",
-                "type": "CICAREScripts.tabCICAREScripts"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 9
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "StaffSurveyForm.varAdhocLocationRecord"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "StaffSurveyForm.varAdhocLocationRecord",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "varAdhocLocationRecord",
-                "module": "StaffSurveyForm",
-                "type": "StaffSurveyForm"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 8
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "StaffSurveyForm.tabStaffSurveyForm.Y"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "StaffSurveyForm.tabStaffSurveyForm.Y",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Y",
-                "module": "StaffSurveyForm",
-                "type": "StaffSurveyForm.tabStaffSurveyForm"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 9
         },
         {
           "locations": [
@@ -4187,19 +4007,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "StaffSurvDetail.tabStaffSurveyForm_1.Y"
+                  "fullyQualifiedName": "RoundHistory.tabRoundHistory.Y"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "StaffSurvDetail.tabStaffSurveyForm_1.Y",
+                  "fullyQualifiedName": "RoundHistory.tabRoundHistory.Y",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "Y",
-                "module": "StaffSurvDetail",
-                "type": "StaffSurvDetail.tabStaffSurveyForm_1"
+                "module": "RoundHistory",
+                "type": "RoundHistory.tabRoundHistory"
               }
             }
           ],
@@ -4217,79 +4037,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "PatientSurvDetail.tabStaffSurveyForm_3.Y"
+                  "fullyQualifiedName": "RoundLocation.tabRDLocation.Y"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "PatientSurvDetail.tabStaffSurveyForm_3.Y",
+                  "fullyQualifiedName": "RoundLocation.tabRDLocation.Y",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "Y",
-                "module": "PatientSurvDetail",
-                "type": "PatientSurvDetail.tabStaffSurveyForm_3"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 9
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "NewRoundSchedule.ResetCheckbox"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "NewRoundSchedule.ResetCheckbox",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "ResetCheckbox",
-                "module": "NewRoundSchedule",
-                "type": "NewRoundSchedule"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 8
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "NewRoundSchedule.tabNewRdSch.Y"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "NewRoundSchedule.tabNewRdSch.Y",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Y",
-                "module": "NewRoundSchedule",
-                "type": "NewRoundSchedule.tabNewRdSch"
+                "module": "RoundLocation",
+                "type": "RoundLocation.tabRDLocation"
               }
             }
           ],
@@ -4350,6 +4110,156 @@
                 "member": "Y",
                 "module": "ScheduleConfirm",
                 "type": "ScheduleConfirm.tabSchRdConfirm"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "StaffSurvDetail.tabStaffSurveyForm_1.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "StaffSurvDetail.tabStaffSurveyForm_1.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "StaffSurvDetail",
+                "type": "StaffSurvDetail.tabStaffSurveyForm_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "StaffSurveyForm.varAdhocLocationRecord"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "StaffSurveyForm.varAdhocLocationRecord",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "varAdhocLocationRecord",
+                "module": "StaffSurveyForm",
+                "type": "StaffSurveyForm"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 8
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "StaffSurveyForm.tabStaffSurveyForm.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "StaffSurveyForm.tabStaffSurveyForm.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "StaffSurveyForm",
+                "type": "StaffSurveyForm.tabStaffSurveyForm"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "AdhocSurveyLocation.tabSurveyLocation.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "AdhocSurveyLocation.tabSurveyLocation.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "AdhocSurveyLocation",
+                "type": "AdhocSurveyLocation.tabSurveyLocation"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CICAREScripts.tabCICAREScripts.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "CICAREScripts.tabCICAREScripts.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "CICAREScripts",
+                "type": "CICAREScripts.tabCICAREScripts"
               }
             }
           ],
@@ -4481,6 +4391,186 @@
           },
           "ruleId": "app-InefficientDelayLoading",
           "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.varHomeShadowShow"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.varHomeShadowShow",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "varHomeShadowShow",
+                "module": "Home",
+                "type": "Home"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 8
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "NewRoundSchedule.ResetCheckbox"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "NewRoundSchedule.ResetCheckbox",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "ResetCheckbox",
+                "module": "NewRoundSchedule",
+                "type": "NewRoundSchedule"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 8
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "NewRoundSchedule.tabNewRdSch.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "NewRoundSchedule.tabNewRdSch.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "NewRoundSchedule",
+                "type": "NewRoundSchedule.tabNewRdSch"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "PatientSurvDetail.tabStaffSurveyForm_3.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "PatientSurvDetail.tabStaffSurveyForm_3.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "PatientSurvDetail",
+                "type": "PatientSurvDetail.tabStaffSurveyForm_3"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "SurveyConfirm.htmlSurveySuccess.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "SurveyConfirm.htmlSurveySuccess.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "SurveyConfirm",
+                "type": "SurveyConfirm.htmlSurveySuccess"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "SurveyConfirm.tabSurveySuccess.Y"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "SurveyConfirm.tabSurveySuccess.Y",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "Y",
+                "module": "SurveyConfirm",
+                "type": "SurveyConfirm.tabSurveySuccess"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-InefficientDelayLoading",
+          "ruleIndex": 9
         }
       ],
       "tool": {
@@ -4488,25 +4578,6 @@
           "fullName": "PowerApps app checker",
           "name": "PowerApps app checker",
           "rules": [
-            {
-              "id": "app-SuggestRemoteExecutionHint",
-              "messageStrings": {
-                "issue": {
-                  "text": "Delegation warning. The \"{0}\" part of this formula might not work correctly on large data sets."
-                }
-              },
-              "properties": {
-                "componentType": "app",
-                "howToFix": [
-                  "If your data set exceeds the 500 record limit but contains less than 2,000 records, try resetting the limit.",
-                  "Try simplifying the formula.",
-                  "Try moving your data to a different data source."
-                ],
-                "level": "Medium",
-                "primaryCategory": "formula",
-                "whyFix": ""
-              }
-            },
             {
               "id": "app-ErrInvalidName",
               "messageStrings": {
@@ -4566,6 +4637,25 @@
               "properties": {
                 "componentType": "app",
                 "level": "High",
+                "primaryCategory": "formula",
+                "whyFix": ""
+              }
+            },
+            {
+              "id": "app-SuggestRemoteExecutionHint",
+              "messageStrings": {
+                "issue": {
+                  "text": "Delegation warning. The \"{0}\" part of this formula might not work correctly on large data sets."
+                }
+              },
+              "properties": {
+                "componentType": "app",
+                "howToFix": [
+                  "If your data set exceeds the 500 record limit but contains less than 2,000 records, try resetting the limit.",
+                  "Try simplifying the formula.",
+                  "Try moving your data to a different data source."
+                ],
+                "level": "Medium",
                 "primaryCategory": "formula",
                 "whyFix": ""
               }

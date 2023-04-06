@@ -121,7 +121,7 @@ StaffSurveyForm As screen:
     btnStaffSurvSubmit As button:
         Fill: =RGBA(0, 85, 135, 1)
         Height: =50
-        OnSelect: |+
+        OnSelect: |-
             =//logging activites
             
             //refresh time for the timeout
@@ -212,29 +212,10 @@ StaffSurveyForm As screen:
                     RoundID: Value(DataCardValue11.Text)
             
                 }
-            )
-            /*
-            Title
-            Positive_Feedback
-            Resources_Needed_for_Role
-            Resources_Utilized
-            Resources_Needed
-            CICARE_Practice_Rating
-            Staff_Recognized
-            Recognition_Comment
-            Opportunity_for_Improvement
-            Need_Follow_up
-            Name_for_Follow_up
-            Name_for_Follow_up_text
-            Round_Location
-            Round_Unit
-            */
-            
-            
-            
-            
-            
-            
+            );
+            ResetForm(frmStaff);
+            //the varRefreshWhat is for the survey confirmation to refresh sharepoint list
+            Navigate(SurveyConfirm, ScreenTransition.None, {varRefreshWhat:"Staff"});   
         Size: =20
         Text: ="Submit"
         Width: =180

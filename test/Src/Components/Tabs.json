@@ -65,7 +65,7 @@
         "Name": "rectUpBord",
         "Parent": "Tabs",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 351,
+        "PublishOrderIndex": 371,
         "Rules": [
           {
             "Category": "Design",
@@ -204,7 +204,7 @@
             "Name": "galleryTemplate2",
             "Parent": "galTabsMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 353,
+            "PublishOrderIndex": 373,
             "Rules": [
               {
                 "Category": "Design",
@@ -305,7 +305,7 @@
             "Name": "iconTabsMenuIcon",
             "Parent": "galTabsMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 354,
+            "PublishOrderIndex": 374,
             "Rules": [
               {
                 "Category": "Design",
@@ -582,7 +582,7 @@
             "Name": "lblTabsMenuName",
             "Parent": "galTabsMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 355,
+            "PublishOrderIndex": 375,
             "Rules": [
               {
                 "Category": "Data",
@@ -902,7 +902,7 @@
         "Name": "galTabsMenu",
         "Parent": "Tabs",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 352,
+        "PublishOrderIndex": 372,
         "Rules": [
           {
             "Category": "Data",
@@ -1083,7 +1083,7 @@
       "Items",
       "HomePage"
     ],
-    "LastModifiedTimestamp": "638163061752234260",
+    "LastModifiedTimestamp": "638164088690056797",
     "Name": "Tabs",
     "Rules": [
       {
@@ -1173,7 +1173,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638163061752234260",
+  "LastModifiedTimestamp": "638164088690056797",
   "Name": "dc07be9e02e241b8bd693c330166475f",
   "OverridableProperties": {},
   "Version": "638126265303409136"

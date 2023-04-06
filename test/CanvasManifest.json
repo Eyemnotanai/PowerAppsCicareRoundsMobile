@@ -130,6 +130,7 @@
     "PatientSurvDetail",
     "FamilySurvey",
     "FamilySurveyDetail",
+    "SurveyConfirm",
     "CICAREScripts",
     "UserLogOutCountDown"
   ]

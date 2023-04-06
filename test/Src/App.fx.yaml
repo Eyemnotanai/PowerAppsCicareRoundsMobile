@@ -13,6 +13,8 @@ App As appinfo:
                 Role.Value
             )
         );
+        Set(varRRMeetLocation,"Rounald Reagan Hospital, Tamkin Auditorium (B-130)"); 
+        Set(varSMMeetLocation,"Santa Monica Auditorium- Room (G340)"); 
         //horizontal menu items
         ClearCollect(
             colHorizontalMenu,
