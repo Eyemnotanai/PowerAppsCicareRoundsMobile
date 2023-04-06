@@ -3797,6 +3797,36 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.RoundID_DataCard1.DataCardValue11.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "StaffSurveyForm.frmStaff.RoundID_DataCard1.DataCardValue11.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "StaffSurveyForm",
+                "type": "StaffSurveyForm.frmStaff.RoundID_DataCard1.DataCardValue11"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 6
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "App.currentUser"
                 }
               ],

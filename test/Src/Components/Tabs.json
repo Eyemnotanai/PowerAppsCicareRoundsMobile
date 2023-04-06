@@ -65,7 +65,7 @@
         "Name": "rectUpBord",
         "Parent": "Tabs",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 351,
+        "PublishOrderIndex": 356,
         "Rules": [
           {
             "Category": "Design",
@@ -204,7 +204,7 @@
             "Name": "galleryTemplate2",
             "Parent": "galTabsMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 353,
+            "PublishOrderIndex": 358,
             "Rules": [
               {
                 "Category": "Design",
@@ -305,7 +305,7 @@
             "Name": "iconTabsMenuIcon",
             "Parent": "galTabsMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 354,
+            "PublishOrderIndex": 359,
             "Rules": [
               {
                 "Category": "Design",
@@ -582,7 +582,7 @@
             "Name": "lblTabsMenuName",
             "Parent": "galTabsMenu",
             "PersistMetaDataIDKey": false,
-            "PublishOrderIndex": 355,
+            "PublishOrderIndex": 360,
             "Rules": [
               {
                 "Category": "Data",
@@ -902,7 +902,7 @@
         "Name": "galTabsMenu",
         "Parent": "Tabs",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 352,
+        "PublishOrderIndex": 357,
         "Rules": [
           {
             "Category": "Data",

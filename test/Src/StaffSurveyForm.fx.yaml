@@ -164,23 +164,33 @@ StaffSurveyForm As screen:
                 )
             );
             
-            Clear(colFollowUpPeopleList);
-            ForAll(
-                DataCardValue16.SelectedItems,
-                Collect(
-                    colFollowUpPeopleList,
+            Set(varFollowUpName,
                     {
                         '@odata.type': "#Mcrosoft.Azure.Connectors.SharePoint.SPListExpandedUser",
-                        Claims: "i:0#.f|membership|" & ThisRecord.Email,
+                        Claims: "i:0#.f|membership|" & DataCardValue16.Selected.Email,
                         Department: "",
-                        DisplayName: ThisRecord.DisplayName,
-                        GivenName: Office365Users.UserProfile(ThisRecord.Email).GivenName,
-                        Email: ThisRecord.Email,
+                        DisplayName: DataCardValue16.Selected.DisplayName,
+                        GivenName: Office365Users.UserProfile(DataCardValue16.Selected.Email).GivenName,
+                        Email: DataCardValue16.Selected.Email,
                         JobTitle: "",
                         Picture: ""
                     }
-                )
+            
             );
+            
+            Set(
+                varBlankPerson,
+                {
+                    Claims: Blank(),
+                    Department: Blank(),
+                    DisplayName: Blank(),
+                    GivenName: Blank(),
+                    Email: Blank(),
+                    JobTitle: Blank(),
+                    Picture: Blank()
+                }
+            );
+            
             Patch(
                 Staff_Survey, 
                 Defaults(Staff_Survey), 
@@ -191,14 +201,15 @@ StaffSurveyForm As screen:
                     Resources_Utilized: DataCardValue9.Text,
                     Resources_Needed: DataCardValue10.Text,
                     CICARE_Practice_Rating: {Value:DataCardValue7.Selected.Value},
-                    Staff_Recognized: colStaffRecognizedList
-                    //Recognition_Comment
-                    //Opportunity_for_Improvement
-                    //Need_Follow_up
-                    //Name_for_Follow_up
-                    //Name_for_Follow_up_text
-                    //Round_Location
-                    //Round_Unit
+                    Staff_Recognized: colStaffRecognizedList,
+                    Recognition_Comment: DataCardValue13.Text,
+                    Opportunity_for_Improvement: DataCardValue14.Text,
+                    Need_Follow_up: If(DataCardValue22.Selected.Value="Yes", true, false),
+                    Name_for_Follow_up: If(IsEmpty(DataCardValue16.Selected.DisplayName), varBlankPerson,varFollowUpName),
+                    Name_for_Follow_up_text: If(IsBlank(DataCardValue17.Text), Blank(), DataCardValue17.Text),
+                    Round_Location: DataCardValue18.Text,
+                    Round_Unit: DataCardValue19.Text,
+                    RoundID: Value(DataCardValue11.Text)
             
                 }
             )
@@ -1270,6 +1281,7 @@ StaffSurveyForm As screen:
             MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Round_Location")
             Required: =false
             Update: =DataCardValue18.Text
+            Visible: =false
             Width: =590
             X: =0
             Y: =12
@@ -1356,6 +1368,7 @@ StaffSurveyForm As screen:
             MaxLength: =DataSourceInfo([@Staff_Survey], DataSourceInfo.MaxLength, "Round_Unit")
             Required: =false
             Update: =DataCardValue19.Text
+            Visible: =false
             Width: =590
             X: =0
             Y: =13
@@ -1429,6 +1442,84 @@ StaffSurveyForm As screen:
                 Width: =30
                 Wrap: =false
                 Y: =DataCardKey21.Y
+                ZIndex: =4
+
+        RoundID_DataCard1 As typedDataCard.numberEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="RoundID"
+            Default: =ThisItem.RoundID
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =DataSourceInfo([@Staff_Survey],DataSourceInfo.DisplayName,"RoundID")
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =Value(DataCardValue11.Text)
+            Visible: =false
+            Width: =590
+            X: =0
+            Y: =14
+            ZIndex: =1
+
+            DataCardKey13 As label:
+                AutoHeight: =true
+                Height: =48
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue11 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: |-
+                    =If(
+                        varDoSurvey = "roundAndSurvey",
+                        varRoundRecord.ID,  //id from Rounds_Calendar
+                        0
+                    )
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                Format: =TextFormat.Number
+                Height: =70
+                PaddingLeft: =5
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =21
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey13.Y + DataCardKey13.Height + 5
+                ZIndex: =2
+
+            ErrorMessage13 As label:
+                AutoHeight: =true
+                Height: =10
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =24
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue11.Y + DataCardValue11.Height
+                ZIndex: =3
+
+            StarVisible13 As label:
+                Align: =Align.Center
+                Height: =DataCardKey13.Height
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey13.Y
                 ZIndex: =4
 
     Label2 As label:
