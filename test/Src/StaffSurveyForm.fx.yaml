@@ -163,8 +163,20 @@ StaffSurveyForm As screen:
                     }
                 )
             );
-            
-            Set(varFollowUpName,
+            If(
+                IsBlank(DataCardValue16.Selected.DisplayName),
+                Set(varFollowUpName,     
+                    {
+                        Claims: Blank(),
+                        Department: Blank(),
+                        DisplayName: Blank(),
+                        GivenName: Blank(),
+                        Email: Blank(),
+                        JobTitle: Blank(),
+                        Picture: Blank()
+                    }
+                ),
+                Set(varFollowUpName,
                     {
                         '@odata.type': "#Mcrosoft.Azure.Connectors.SharePoint.SPListExpandedUser",
                         Claims: "i:0#.f|membership|" & DataCardValue16.Selected.Email,
@@ -175,20 +187,7 @@ StaffSurveyForm As screen:
                         JobTitle: "",
                         Picture: ""
                     }
-            
-            );
-            
-            Set(
-                varBlankPerson,
-                {
-                    Claims: Blank(),
-                    Department: Blank(),
-                    DisplayName: Blank(),
-                    GivenName: Blank(),
-                    Email: Blank(),
-                    JobTitle: Blank(),
-                    Picture: Blank()
-                }
+                )
             );
             
             Patch(
@@ -205,7 +204,7 @@ StaffSurveyForm As screen:
                     Recognition_Comment: DataCardValue13.Text,
                     Opportunity_for_Improvement: DataCardValue14.Text,
                     Need_Follow_up: If(DataCardValue22.Selected.Value="Yes", true, false),
-                    Name_for_Follow_up: If(IsEmpty(DataCardValue16.Selected.DisplayName), varBlankPerson,varFollowUpName),
+                    Name_for_Follow_up: varFollowUpName,
                     Name_for_Follow_up_text: If(IsBlank(DataCardValue17.Text), Blank(), DataCardValue17.Text),
                     Round_Location: DataCardValue18.Text,
                     Round_Unit: DataCardValue19.Text,
