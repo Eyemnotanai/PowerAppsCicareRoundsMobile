@@ -200,7 +200,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "htmlSchRdConfirm",
-      "ParentIndex": 3,
+      "ParentIndex": 6,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -416,7 +416,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "iconSchRdConfirm",
-      "ParentIndex": 5,
+      "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -607,7 +607,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "iconSchRdConfirmBG",
-      "ParentIndex": 4,
+      "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -749,7 +749,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "imgSchRdConfirmHead",
-      "ParentIndex": 0,
+      "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -1008,7 +1008,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSchRdConfirmMSG",
-      "ParentIndex": 6,
+      "ParentIndex": 7,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -1299,7 +1299,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "lblSchRdConfirmTitle",
-      "ParentIndex": 2,
+      "ParentIndex": 5,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -1543,7 +1543,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "rectSchRdConfirmHeadBG",
-      "ParentIndex": 1,
+      "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -1766,7 +1766,7 @@
       },
       "MetaDataIDKey": "",
       "Name": "tabSchRdConfirm",
-      "ParentIndex": 8,
+      "ParentIndex": 0,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -2129,7 +2129,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "tmSchRdConfirmTimer",
-      "ParentIndex": 7,
+      "ParentIndex": 8,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {

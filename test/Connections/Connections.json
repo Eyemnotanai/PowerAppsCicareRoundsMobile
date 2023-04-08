@@ -95,6 +95,19 @@
             }
           }
         }
+      },
+      "https://uclahs.sharepoint.com/teams/iss/migration/CICARE_Rounds_Test_V2_new_shared_sharepointonline_edc77271861549c1b6dca8d634051df3": {
+        "datasetOverride": {
+          "environmentVariableName": "new_shared_sharepointonline_edc77271861549c1b6dca8d634051df3"
+        },
+        "dataSources": {
+          "Patient_Survey": {
+            "tableName": "328b73e1-2004-46ba-a5f6-964b2f2f2906",
+            "tableNameOverride": {
+              "environmentVariableName": "new_shared_sharepointonline_295dc1bb11d240618e46d63503fc9109"
+            }
+          }
+        }
       }
     },
     "dataSources": [
@@ -105,7 +118,8 @@
       "Rounds_Location",
       "Rounds_Calendar",
       "Notification_Cancelled_Rounds",
-      "Survey_Questions"
+      "Survey_Questions",
+      "Patient_Survey"
     ],
     "dependencies": {},
     "dependents": [],
