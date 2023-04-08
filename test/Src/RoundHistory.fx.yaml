@@ -6,8 +6,8 @@ RoundHistory As screen:
             Audit_Log,
             Defaults(Audit_Log),
             {
-                Title: User().Email & "Round History page",
-                Activity: App.ActiveScreen.Name & "/Mobile app",
+                Title: User().Email,
+                Activity: App.ActiveScreen.Name & "/mobile. round hitory",
                 LocationLong: Location.Longitude,
                 LocationLat: Location.Latitude
             }
@@ -18,7 +18,7 @@ RoundHistory As screen:
         //reset the timer for the UserLogOutCountDown
         Reset(tmCountDown);
         
-        UpdateContext({flgCompSurv:false});      //show round history frame
+        UpdateContext({flgCompSurv:true});      //show round history frame
         UpdateContext({flgAttendance:false});   //hide attendance frame
         UpdateContext({flgTeamReport:false});   //hide team report frame
         
@@ -31,7 +31,10 @@ RoundHistory As screen:
             colSurvList,
             ShowColumns(
                 AddColumns(
-                    Filter(Staff_Survey, RoundID>0),
+                    Filter(
+                        Staff_Survey, 
+                        RoundID > 0
+                    ),
                     "SurveyType",
                     "Staff",
                     "CreatedBy",
@@ -634,6 +637,23 @@ RoundHistory As screen:
         Items: |-
             =["Completed Survey", "Attendance", "Team Report"]
             //["Completed Survey", "Attendance"]
+        OnSelect: |-
+            =//write to audit log
+            Patch(
+                Audit_Log,
+                Defaults(Audit_Log),
+                {
+                    Title: User().Email,
+                    Activity: App.ActiveScreen.Name & "/mobile. round hitory top menu clicked",
+                    LocationLong: Location.Longitude,
+                    LocationLat: Location.Latitude
+                }
+            );
+            
+            //Set time for session timeout
+            Set(lastActivityTime, Now());
+            //reset the timer for the UserLogOutCountDown
+            Reset(tmCountDown);
         TemplateFill: =If(ThisItem.IsSelected, RGBA(255, 199, 44, 1), RGBA(246, 244, 238, 1))
         TemplatePadding: =0
         TemplateSize: =180
@@ -650,8 +670,24 @@ RoundHistory As screen:
                 Color.Transparent
             HoverColor: =RGBA(39, 116, 174,1)
             HoverFill: =If(ThisItem.IsSelected, RGBA(255, 199, 44, 1), RGBA(246, 244, 238, 1))
-            OnSelect: |
-                =/*
+            OnSelect: |+
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile. round hitory top menu clicked",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                /*
                 ["Completed Survey", "Attendance", "Team Report"]
                 */
                 If(
@@ -673,19 +709,7 @@ RoundHistory As screen:
                         
                     )
                 );
-                //logging activites
-                Patch(
-                    Audit_Log,
-                    Defaults(Audit_Log),
-                    {
-                        Title: User().Email & " Round History tab",
-                        Activity: "Tab clicked " & ThisItem.Value,
-                        LocationLong: Location.Longitude,
-                        LocationLat: Location.Latitude
-                    }
-                );
-                //refresh time for the timeout
-                Set(lastActivityTime, Now());
+                
             PressedColor: =RGBA(39, 116, 174,1)
             PressedFill: =If(ThisItem.IsSelected, RGBA(255, 199, 44, 1), RGBA(246, 244, 238, 1))
             RadiusBottomLeft: =0
@@ -856,6 +880,7 @@ RoundHistory As screen:
                         )
                     )
                 )
+            Visible: =flgAttendance
             Width: =323
             X: =269
             Y: =lblRHFamilyLabel.Y+lblRHFamilyLabel.Height+40
@@ -868,6 +893,7 @@ RoundHistory As screen:
             Height: =70
             Size: =18
             Text: ="Ad Hoc Survey"
+            Visible: =flgAttendance
             Width: =195
             X: =49
             Y: =lblRHFamilyLabel.Y+lblRHFamilyLabel.Height+40

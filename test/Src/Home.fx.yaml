@@ -6,7 +6,7 @@ Home As screen:
             Audit_Log,
             Defaults(Audit_Log),
             {
-                Title: User().Email & " ",
+                Title: User().Email,
                 Activity: App.ActiveScreen.Name & "/mobile. Home page loading...",
                 LocationLong: Location.Longitude,
                 LocationLat: Location.Latitude
