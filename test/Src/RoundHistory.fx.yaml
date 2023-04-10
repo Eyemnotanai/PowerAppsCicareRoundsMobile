@@ -49,6 +49,30 @@ RoundHistory As screen:
                 "Created"
             )
         );
+        /*
+        Collect(
+            colSurvList,
+            ShowColumns(
+                AddColumns(
+                    Filter(
+                        Staff_Survey, 
+                        RoundID > 0
+                    ),
+                    "SurveyType",
+                    If(RoundID=0, "AdHoc",
+                    "Staff"),
+                    "CreatedBy",
+                    'Created By'.Email
+                ),
+                "ID",
+                "Title",
+                "Round_Unit",
+                "SurveyType",
+                "RoundID",
+                "CreatedBy",
+                "Created"
+            )
+        );
         Collect(
             colSurvList,
             ShowColumns(
@@ -68,7 +92,7 @@ RoundHistory As screen:
                 "Created"
             )
         );
-        /*
+        
         Collect(//RoundStartDateTime
             colSurvList,
             ShowColumns(
@@ -455,7 +479,28 @@ RoundHistory As screen:
         btnRHViewSurv As button:
             Height: =50
             OnSelect: |-
-                =//Select(Parent)
+                =//write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile. View button clicked",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                
+                Navigate(
+                    StaffSurvDetail,
+                    ScreenTransition.None,
+                    {varStaffSurvViewID: ThisItem.ID}
+                );
                 /*
                 If(
                     ThisItem.SurveyType = "Staff",
@@ -471,19 +516,6 @@ RoundHistory As screen:
                     )
                 );
                 */
-                //logging activites
-                Patch(
-                    Audit_Log,
-                    Defaults(Audit_Log),
-                    {
-                        Title: User().Email & " Round History",
-                        Activity: "View survey detail",
-                        LocationLong: Location.Longitude,
-                        LocationLat: Location.Latitude
-                    }
-                );
-                //refresh time for the timeout
-                Set(lastActivityTime, Now());
             RadiusBottomLeft: =30
             RadiusBottomRight: =30
             RadiusTopLeft: =30
@@ -581,7 +613,7 @@ RoundHistory As screen:
         lblRHCategory As label:
             OnSelect: =Select(Parent)
             Size: =16
-            Text: =//ThisItem.SurveyType
+            Text: =ThisItem.SurveyType
             Width: =280
             X: =lblRHCateLabel.X+lblRHCateLabel.Width
             Y: =lblRHTitle.Y+lblRHTitle.Height

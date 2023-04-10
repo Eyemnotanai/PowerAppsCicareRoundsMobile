@@ -98,13 +98,15 @@
       },
       "https://uclahs.sharepoint.com/teams/iss/migration/CICARE_Rounds_Test_V2_new_shared_sharepointonline_edc77271861549c1b6dca8d634051df3": {
         "datasetOverride": {
-          "environmentVariableName": "new_shared_sharepointonline_edc77271861549c1b6dca8d634051df3"
+          "environmentVariableName": "new_shared_sharepointonline_edc77271861549c1b6dca8d634051df3",
+          "name": "https://uclahs.sharepoint.com/teams/iss/migration/CICARE_Rounds_Test_V2"
         },
         "dataSources": {
           "Patient_Survey": {
             "tableName": "328b73e1-2004-46ba-a5f6-964b2f2f2906",
             "tableNameOverride": {
-              "environmentVariableName": "new_shared_sharepointonline_295dc1bb11d240618e46d63503fc9109"
+              "environmentVariableName": "new_shared_sharepointonline_295dc1bb11d240618e46d63503fc9109",
+              "name": "328b73e1-2004-46ba-a5f6-964b2f2f2906"
             }
           }
         }
