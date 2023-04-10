@@ -532,7 +532,32 @@ RoundHistory As screen:
             Height: =50
             OnSelect: |-
                 =//Select(Parent)
-                /*
+                //write to audit log
+                Patch(
+                    Audit_Log,
+                    Defaults(Audit_Log),
+                    {
+                        Title: User().Email,
+                        Activity: App.ActiveScreen.Name & "/mobile. OnSelect Edit button.",
+                        LocationLong: Location.Longitude,
+                        LocationLat: Location.Latitude
+                    }
+                );
+                //Set time for session timeout
+                Set(lastActivityTime, Now());
+                //reset the timer for the UserLogOutCountDown
+                Reset(tmCountDown);
+                Set(varRoundRecord, galRHCompSurvey.Selected);  //information for edit the survey form
+                Navigate(
+                    StaffSurveyForm,
+                    ScreenTransition.None,
+                    {
+                        varDoSurvey:"roundAndSurvey",
+                        varSurvStatus: "edit"
+                    }
+                )//edit exist staff survey
+                
+                /*varDoSurvey:"roundAndSurvey", varSurvStatus:"new"
                 If(
                     ThisItem.SurveyType = "Staff",
                     Navigate(
@@ -559,11 +584,10 @@ RoundHistory As screen:
                         LocationLat: Location.Latitude
                     }
                 );
-                */
                 
                 //refresh time for the timeout
                 Set(lastActivityTime, Now());
-                /*
+                
                 If(
                     ThisItem.SurveyType = "Staff",
                     Navigate(

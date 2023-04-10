@@ -144,9 +144,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -187,9 +192,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -231,9 +241,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -273,7 +288,13 @@ StaffSurvDetail As screen:
                 FontWeight: =FontWeight.Semibold
                 Height: =48
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
                 Wrap: =false
                 X: =30
@@ -317,9 +338,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -330,7 +356,7 @@ StaffSurvDetail As screen:
                 DefaultSelectedItems: =Parent.Default
                 DisplayFields: =["Value"]
                 DisplayMode: =Parent.DisplayMode
-                Height: =70
+                Height: =50
                 Items: =Choices([@Staff_Survey].CICARE_Practice_Rating)
                 PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
                 SearchFields: =["Value"]
@@ -392,9 +418,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -405,7 +436,7 @@ StaffSurvDetail As screen:
                 DefaultSelectedItems: =Parent.Default
                 DisplayFields: =["DisplayName","Email","Picture"]
                 DisplayMode: =Parent.DisplayMode
-                Height: =70
+                Height: =50
                 Items: =Choices([@Staff_Survey].Staff_Recognized)
                 PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
                 SearchFields: =["DisplayName"]
@@ -466,9 +497,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -509,9 +545,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -552,9 +593,14 @@ StaffSurvDetail As screen:
                 Height: =48
                 PaddingLeft: =0
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
-                Wrap: =false
                 X: =30
                 Y: =10
                 ZIndex: =1
@@ -596,7 +642,13 @@ StaffSurvDetail As screen:
                 FontWeight: =FontWeight.Semibold
                 Height: =48
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
                 Wrap: =false
                 X: =30
@@ -670,7 +722,13 @@ StaffSurvDetail As screen:
                 FontWeight: =FontWeight.Semibold
                 Height: =48
                 Size: =18
-                Text: =Parent.DisplayName
+                Text: |-
+                    =//Parent.DisplayName
+                    LookUp(
+                        Survey_Questions,
+                        Title = Parent.DisplayName && Survey_Type.Value = "Staff Survey",
+                        Question
+                    )
                 Width: =Parent.Width - 60
                 Wrap: =false
                 X: =30
@@ -681,6 +739,7 @@ StaffSurvDetail As screen:
                 AutoHeight: =true
                 Color: =RGBA(0,85, 135, 1)
                 DisplayMode: =Parent.DisplayMode
+                Height: =125
                 PaddingLeft: =0
                 PaddingRight: =0
                 PaddingTop: =0
