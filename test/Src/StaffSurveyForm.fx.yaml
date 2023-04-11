@@ -41,7 +41,7 @@ StaffSurveyForm As screen:
                         JobTitle: "",
                         Picture: ""
                     }
-                )
+                ) 
             )
         );
         /*
@@ -155,7 +155,7 @@ StaffSurveyForm As screen:
                         Claims: "i:0#.f|membership|" & ThisRecord.Email,
                         Department: "",
                         DisplayName: ThisRecord.DisplayName,
-                        GivenName: Office365Users.UserProfile(ThisRecord.Email).GivenName,
+                        GivenName: Office365Users.UserProfile(ThisRecord.Email).GivenName, //get given name from office 365
                         Email: ThisRecord.Email,
                         JobTitle: "",
                         Picture: ""
