@@ -157,9 +157,9 @@ StaffSurvDetail As screen:
                 ZIndex: =1
 
             DataCardValue15 As label:
-                AutoHeight: =true
                 Color: =RGBA(0,85, 135, 1)
                 DisplayMode: =Parent.DisplayMode
+                Height: =35
                 PaddingLeft: =10
                 PaddingRight: =0
                 PaddingTop: =0
@@ -739,7 +739,7 @@ StaffSurvDetail As screen:
                 AutoHeight: =true
                 Color: =RGBA(0,85, 135, 1)
                 DisplayMode: =Parent.DisplayMode
-                Height: =125
+                Height: =90
                 PaddingLeft: =0
                 PaddingRight: =0
                 PaddingTop: =0
