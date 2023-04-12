@@ -1,8 +1,5 @@
 {
   "295eb346-3860-4060-808f-13b6b433bb60": {
-    "connectionParameters": {
-      "sku": "Enterprise"
-    },
     "connectionRef": {
       "apiTier": "Standard",
       "displayName": "Office 365 Users",
@@ -20,9 +17,6 @@
     "id": "295eb346-3860-4060-808f-13b6b433bb60"
   },
   "a6c184cd-79ef-4bc8-b1a8-36c15be80507": {
-    "connectionParameters": {
-      "sku": "Enterprise"
-    },
     "connectionRef": {
       "apiTier": "Standard",
       "displayName": "SharePoint",
@@ -128,9 +122,6 @@
     "id": "a6c184cd-79ef-4bc8-b1a8-36c15be80507"
   },
   "bef6634e-82ad-4b5f-aead-5865bae72727": {
-    "connectionParameters": {
-      "sku": "Enterprise"
-    },
     "connectionRef": {
       "apiTier": "Standard",
       "displayName": "Office 365 Outlook",

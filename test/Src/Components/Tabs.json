@@ -1083,7 +1083,7 @@
       "Items",
       "HomePage"
     ],
-    "LastModifiedTimestamp": "638169128747308320",
+    "LastModifiedTimestamp": "638169383133067024",
     "Name": "Tabs",
     "Rules": [
       {
@@ -1173,7 +1173,7 @@
   "IsPcfControl": false,
   "IsPremiumPcfControl": false,
   "IsWidgetTemplate": false,
-  "LastModifiedTimestamp": "638169128747308320",
+  "LastModifiedTimestamp": "638169383133067024",
   "Name": "dc07be9e02e241b8bd693c330166475f",
   "OverridableProperties": {},
   "Version": "638126265303409136"
