@@ -430,9 +430,24 @@ AdhocSurveyLocation As screen:
                 //hide popup if the radio button selected
                 If(
                     IsBlank(radAdHocSurvCategoy.Selected.Value),
-                    UpdateContext({varAdHocErrShow: true}),//error message show
-                    UpdateContext({varAdHocSelectCategoryShow: false});  //entire group visibility status
-                    UpdateContext({varAdHocErrShow: false})//hide error message lblAdHocSurvErrMSG
+                    UpdateContext({varAdHocErrShow: true}),             //error message show
+                    UpdateContext({varAdHocSelectCategoryShow: false});  //else block. entire group visibility status
+                    UpdateContext({varAdHocErrShow: false});             //hide error message lblAdHocSurvErrMSG
+                
+                
+                    If(//["Staff Survey", "Patient Survey", "Family/Visitor Survey"]
+                        radAdHocSurvCategoy.Selected.Value = "Staff Survey",
+                        Navigate(StaffSurveyForm, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"}),
+                        If(
+                            radAdHocSurvCategoy.Selected.Value = "Patient Survey",
+                            Navigate(PatientSurveyForm, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"}),
+                            If(
+                                radAdHocSurvCategoy.Selected.Value = "Family/Visitor Survey",
+                                Navigate(FamilySurvey, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"})
+                            )
+                        )
+                    );//*** end if survey type
+                    
                 );
             Size: =24
             Text: ="Next"
@@ -483,7 +498,7 @@ AdhocSurveyLocation As screen:
                 Reset(tmCountDown);
                 
                 
-                UpdateContext({varAdHocSelectCategoryShow: false}); //hide grpAdhocSurvCategory
+                //UpdateContext({varAdHocSelectCategoryShow: false}); //hide grpAdhocSurvCategory
                 UpdateContext({varAdHocErrShow:false});             //hide error message (lblAdHocSurvErrMSG)
                 /*
                 varDoSurvey: adhocSurvey
