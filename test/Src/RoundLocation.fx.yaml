@@ -199,7 +199,7 @@ RoundLocation As screen:
                 Set(varEndTime, galRDLocationInfo.Selected.'End Time');
                 
                 UpdateContext({varLocIsSelected:true}); //enable the "Continue" button if the checkbox is checked
-                Navigate(RoundUnits);
+                //Navigate(RoundUnits);
             OnSelect: |-
                 =//write to audit log
                 Patch(

@@ -40,6 +40,8 @@
       "Need_Follow_up": "Need_Follow_up",
       "Preferred_Name": "Preferred_Name",
       "Reason_for_Rating": "Reason_for_Rating",
+      "Round_Date": "Round_Date",
+      "Round_End_Date": "Round_End_Date",
       "Round_Location": "Round_Location",
       "Round_Unit": "Round_Unit",
       "Staff_Recognition": "Staff_Recognition",

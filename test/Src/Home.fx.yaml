@@ -214,7 +214,7 @@ Home As screen:
                 Reset(tmCountDown);
                 
                 
-                Set(varSelectedRoundRow, ThisItem.ID);
+                Set(varSelectedRoundRow, ThisItem.ID);          //the id variable is for enable/disable radio button or start survey button
                 //Set(varSelectedRoundTitle, ThisItem.Title);
                 UpdateContext({varHomeShadowShow:true});       //show shadow frame  (rectHomeShadow)
                 UpdateContext({varHomeTaskShow:true});         //show Home Tasks popup frame (grpHomeTasks)
@@ -537,7 +537,7 @@ Home As screen:
             Height: =62
             HoverColor: =Self.Color
             HoverFill: =RGBA(39, 116, 174, 1)
-            OnSelect: |
+            OnSelect: |+
                 =//write to audit log
                 Patch(
                     Audit_Log,
@@ -556,69 +556,34 @@ Home As screen:
                 //reset the timer for the UserLogOutCountDown
                 Reset(tmCountDown);
                 
-                
                 //varHomeSelectSurveyShow
                 If(//if use click the "Start Surevey" without select the survey type, display warning
                     IsBlank(radHomeSurvType.Selected.Value),
-                    UpdateContext({varHomeSelectSurveyShow: true}),
-                    UpdateContext({varHomeSelectSurveyShow: false});
+                    UpdateContext({varHomeSelectSurveyShow: true}),     //If user did not select any radio button, show select survey type warning message (lblHomeSurvTypeWarningMsg)
+                    //else block
+                    UpdateContext({varHomeSelectSurveyShow: false});    //Hide select survey type warning message (lblHomeSurvTypeWarningMsg)
+                    UpdateContext({varHomeTaskShow: false});            //hide grpHomeTasks
+                    UpdateContext({varHomeSurvDateWarningShow: false}); //hide lblHomeSurvDateWarning
                     //launch survey page
                     If(//["Staff Survey", "Patient Survey", "Family/Visitor Survey"]
                         radHomeSurvType.Selected.Value = "Staff Survey",
-                        Navigate(
-                            StaffSurveyForm,
-                            ScreenTransition.None,
-                            {
-                                varMyreservationTitle: LookUp(Rounds_Calendar, ID=varSelectedRoundRow, Title)
-                            }
-                        ),
+                        Navigate(StaffSurveyForm, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"}),
                         If(
                             radHomeSurvType.Selected.Value = "Patient Survey",
-                            Navigate(PatientSurveyForm, ScreenTransition.None),
+                            Navigate(PatientSurveyForm, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"}),
+                        If(
+                            radHomeSurvType.Selected.Value = "Family/Visitor Survey",
+                            Navigate(FamilySurvey, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"})
+                        ),
                             If(
                                 radHomeSurvType.Selected.Value = "Family/Visitor Survey",
-                                Navigate(FamilySurvey, ScreenTransition.None)
+                                Navigate(FamilySurvey, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"})
                             )
                         )
                     );//*** end if survey type
                     UpdateContext({varHomeSurvTypeRadioReset:true});    //reset the home popup radio button
                 );  //*** end if radio button validation
-                /* ALL OF THE FOLLOWING CODE MAY BE DELETED
-                // Select(Parent);
-                If (IsBlank(galMyReservationsPreview.Selected.Attendees.DisplayName), 
-                    UpdateContext({recipientEmail: User().Email, recipient: User().FullName }),  
-                    UpdateContext({recipientEmail: galMyReservationsPreview.Selected.Attendees.Email & " ; " & User().Email, recipient: galMyReservationsPreview.Selected.Attendees.DisplayName })
-                );
                 
-                //Meeting location
-                If(galMyReservationsPreview.Selected.Location = "RR",
-                    Set(varHomeCancelLocation, "Rounald Reagan Hospital, Tamkin Auditorium (B-130)"),
-                    Set(varHomeCancelLocation, "•	Santa Monica Auditorium- Room (G340)")
-                );
-                Set(varHomeRoundsUnit, LookUp(Rounds_Location, Title=galMyReservationsPreview.Selected.R_Location.Value).Address);
-                Set(varHomeCancelStartDate, DateValue(galMyReservationsPreview.Selected.'Start Time'));
-                Set(varHomeCancelStartTime,TimeValue(galMyReservationsPreview.Selected.'Start Time'));
-                Set(varHomeCancelSubject,"You Cancelled your upcoming CICARE Round. ");
-                Set(varHomeCancelMsg,"<p>Dear " & recipient & "</p><p>This is a confirmation that you have cancelled your reservation for the following round:</p><p>CICARE Rounds on " & varHomeCancelStartDate & " from " & varHomeCancelStartTime & "</p><p>Meeting Location: " & varHomeCancelLocation & "</p><p>Rounding Area: " & varHomeRoundsUnit & "</p><p>If you need to reschedule a CICARE Round, pleaseuse the <a href='https://apps.powerapps.com/play/0e1fa206-d4b6-463e-933e-b5881da990e9?tenantId=39c3716b-6471-4fd5-ac04-a7dbaa32782b&hidenavbar=true'>CICARE App</a></p> ");
-                
-                //send email
-                Office365Outlook.SendEmailV2(recipientEmail,varHomeCancelSubject,varHomeCancelMsg,{Importance:"Normal"});
-                */
-                /*
-                Office365Outlook.SendEmailV2(recipientEmail, 
-                                             "Your CICARE round at " & galMyReservationsPreview.Selected.R_Location.Value & " from " & galMyReservationsPreview.Selected.'Start Time' & " to " & galMyReservationsPreview.Selected.'End Time' & " is canceled. ", 
-                                             "Dear " & recipient & "<br>" & "<P> Your CICARE round at " & galMyReservationsPreview.Selected.R_Location.Value & " from " & galMyReservationsPreview.Selected.'Start Time' & " to " & galMyReservationsPreview.Selected.'End Time' & " is canceled. </P>" & "<P>If you need to book a new round please go to the PowerApps. </P>" & "<P>Click the following link to access the PowerApps. <BR> <a href='https://apps.powerapps.com/play/0e1fa206-d4b6-463e-933e-b5881da990e9?tenantId=39c3716b-6471-4fd5-ac04-a7dbaa32782b&hidenavbar=true'>UCLA Health CICARE Rounds</a>  </P>"
-                );
-                */
-                /*
-                Remove(Rounds_Calendar,galMyReservationsPreview.Selected);
-                UpdateContext({varDelRoundWarnShow:false});
-                
-                //Reset timer
-                Set(
-                    lastActivityTime,
-                    Now()
-                );*/
             PressedFill: =RGBA(39, 116, 174, 1)
             Size: =18
             Text: ="Start Survey"
@@ -730,15 +695,13 @@ Home As screen:
                 Set(lastActivityTime, Now());
                 //reset the timer for the UserLogOutCountDown
                 Reset(tmCountDown);
+                UpdateContext({varHomeSelectSurveyShow: false});    //Hide select survey type warning message (lblHomeSurvTypeWarningMsg)
                 
-                UpdateContext({varHomeSelectSurveyShow: false}); //Hide select survey type warning message (lblHomeSurvTypeWarningMsg)
-                UpdateContext({varHomeTaskShow: false});    //hide grpHomeTasks
-                UpdateContext({varHomeSurvDateWarningShow: false}); //hide lblHomeSurvDateWarning
                 /*
                 varDoSurvey
                 varSurvStatus
                 varRoundRecord
-                */
+                
                 //launch survey form for click on the radio button
                 If(
                     radHomeSurvType.Selected.Value = "Staff Survey",
@@ -751,7 +714,7 @@ Home As screen:
                             Navigate(FamilySurvey, ScreenTransition.None, {varDoSurvey:"roundAndSurvey", varSurvStatus:"new"})
                         )
                     )
-                )
+                )*/
             RadioSize: =35
             Reset: =varHomeSurvTypeRadioReset
             Size: =18

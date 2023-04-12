@@ -43,6 +43,8 @@
       "Resources_Needed": "Resources_Needed",
       "Resources_Needed_for_Role": "Resources_Needed_for_Role",
       "Resources_Utilized": "Resources_Utilized",
+      "Round_Date": "Round_Date",
+      "Round_End_Date": "Round_End_Date",
       "Round_Location": "Round_Location",
       "Round_Unit": "Round_Unit",
       "RoundID": "RoundID",
